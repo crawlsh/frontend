@@ -11,16 +11,19 @@
       <h3 style="margin-top: -25px">{{ $t('m.Description') }}</h3>
       <p>{{ $t('m.ModeSelection') }}</p>
       <div class="customSelect">
-        <el-select v-model="value" filterable placeholder="请选择" class="selectContainer">
+        <el-select v-model="selectedMode" filterable placeholder="请选择" class="selectContainer">
           <el-option
             v-for="item in options"
             :key="item.value"
             :label="item.label"
             :value="item.value">
+            <span style="font-family: 'Avenir', Helvetica, Arial, sans-serif;float: left">{{ item.label }}</span>
+            <span style="font-family: 'Avenir', Helvetica, Arial, sans-serif;
+                         float: right; color: #8492a6; font-size: 13px">{{ item.description }}</span>
           </el-option>
         </el-select>
         <div class="startJourneyContainer">
-          <el-button class="btn btn-outline-dark startJourneyButton" type="button" onclick="step1Done()">
+          <el-button class="btn btn-outline-dark startJourneyButton" type="button" @click="goCrawlSetting(selectedMode)">
             {{ $t('m.StartJourney') }}
           </el-button>
         </div>
@@ -34,33 +37,43 @@
 import container from './container.vue'
 import promo from './promo.vue'
 import coreContainer from './coreContainer.vue'
+import axios from 'axios'
+import BASE_URL from '../config'
+import store from '../store'
 
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
-      value: '',
+      selectedMode: '',
       options: [{
-        value: '按照链接爬取',
-        label: '按照链接爬取'
-      }, {
-        value: '选项2',
-        label: '双皮奶'
-      }, {
-        value: '选项3',
-        label: '蚵仔煎'
-      }, {
-        value: '选项4',
-        label: '龙须面'
-      }, {
-        value: '选项5',
-        label: '北京烤鸭'
+        value: "0",
+        label: '按照链接爬取',
+        description: ''
+      },{
+        value: "1",
+        label: '全站爬取',
+        description: ''
       }],
     }
   },
   mounted(){
-
+    axios.get(BASE_URL + "getCrawlMethods").then((res) => {
+      store.commit("setCrawlMethodsInfo", res["data"]);
+      for (let method in res["data"]){
+        this.options.push({
+          value: method,
+          label: res["data"][method]["name"],
+          description: res["data"][method]["description"],
+        })
+      }
+    })
+  },
+  methods: {
+    goCrawlSetting: function(selectedMode){
+      this.$router.push({ name: 'CrawlSetting', query: { selectedMode: selectedMode }});
+    }
   },
   components: {
     container,

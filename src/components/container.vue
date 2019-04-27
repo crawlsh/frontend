@@ -16,13 +16,12 @@
 </script>
 
 <style scoped>
-
   .bkgContainer{
-    top: -150px;
+    top: -220px;
     left: 0;
     right: 0;
     width: 100%;
-    height: 70%;
+    height: 680px;
     background:
       /*1*/ radial-gradient(ellipse at center, rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%),
       /*2*/ radial-gradient(ellipse at 70% 60%, rgba(195,224,96,1) 0%,rgba(195,224,96,0) 30%),

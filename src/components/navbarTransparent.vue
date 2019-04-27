@@ -8,10 +8,10 @@
     </li>
     <li class="leftItem" v-show="!hasLogin">
       <el-button class="navButtonLeft primaryButton" type="primary" v-on:click="startLogin">登陆</el-button>
-      <el-button class="navButtonLeft" type="primary" plain v-on:click="startRegister">注册</el-button>
+      <el-button class="navButtonLeft secondaryButton" type="primary" plain v-on:click="startRegister">注册</el-button>
     </li>
     <li class="leftItem" v-show="hasLogin">
-      <el-button class="navButtonLeft" plain type="primary" v-on:click="logout">登出</el-button>
+      <el-button class="navButtonLeft secondaryButton" plain type="primary" v-on:click="logout">登出</el-button>
     </li>
     <el-dialog
           title="登陆"
@@ -70,7 +70,7 @@
         isRegisterError: 0,
         errorMsg: '',
         successRegister: 0,
-        hasLogin: 0
+        hasLogin: 0,
 
       }
     },
@@ -180,7 +180,7 @@
 <style scoped>
   .navbar{
     position: absolute;
-    margin-top: 8%;
+    margin-top: 100px;
     padding: 0;
     width: 100%;
   }
@@ -197,7 +197,7 @@
     border-color: #2c3e50;
     border-width: 0;
     border-bottom-width: 1px;
-    transition: all 0.3s ease-in-out;
+    transition: all 20ms ease-in-out;
   }
   .navButtonLeft{
     margin-top: -7.5px;
@@ -208,8 +208,16 @@
     border-color: #f8f9fa;
   }
   .primaryButton{
-    background: #409EFF;
-    border-color: #409EFF;
+    background: #444;
+    border-color: #444;
+  }
+  .secondaryButton:hover{
+    background: #444;
+    border-color: #444;
+  }
+  .secondaryButton:focus{
+    background: transparent;
+    border-color: #fff;
   }
   .navbarBadges{
     float: left;

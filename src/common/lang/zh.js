@@ -1,5 +1,5 @@
 export const m = {
-  App: 'Aparker',
+  App: 'Crawl.sh',
   Description: '一个智能爬虫系统',
   Login: '登陆',
   Register: '注册',

@@ -5,17 +5,11 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    hasLogin: false,
-    token: "",
+    crawlMethodsInfo: {},
   },
   mutations: {
-    setToken(state, token) {
-      state.hasLogin = true;
-      state.token = token;
-    },
-    logout(state) {
-      state.hasLogin = false
-      state.token = null
+    setCrawlMethodsInfo(state, crawlMethodsInfo) {
+      state.crawlMethodsInfo = crawlMethodsInfo;
     },
   },
 
