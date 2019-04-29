@@ -30,7 +30,7 @@
         <el-table-column label="查看任务">
           <template slot-scope="scope">
             <el-button
-              @click.native.prevent="go(scope.row.jobToken)"
+              @click.native.prevent="goDetail(scope.row.jobToken)"
               type="text">
               查看任务
             </el-button>
@@ -76,8 +76,8 @@
         var D = date.getDate() < 10 ? '0'+(date.getDate()) : date.getDate();
         return Y+M+D;
       },
-      go: (jobToken) => {
-        console.log(jobToken)
+      goDetail(jobToken) {
+        this.$router.push({ name: 'HistoryDetail', query: { jobToken: jobToken }});
       }
 
   },
