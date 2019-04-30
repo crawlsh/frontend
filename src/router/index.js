@@ -5,10 +5,16 @@ import History from '@/components/history'
 import CrawlSetting from '@/components/crawlSetting'
 import CrawlForSelection from '@/components/crawlForSelection'
 import CrawlForSelectionByChecks from '@/components/crawlForSelectionByChecks'
+import HistoryDetail from '@/components/historyDetail'
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/historyDetail',
+      name: 'HistoryDetail',
+      component: HistoryDetail
+    },
     {
       path: '/crawlFSC',
       name: 'CrawlForSelectionByChecks',

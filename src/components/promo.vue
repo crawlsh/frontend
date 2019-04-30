@@ -47,8 +47,8 @@
       <div class="row about footer-xs">
         <div class="col-lg-4 col-xs-12 col-md-3 col-sm-12 text-center mt-70">
           <h1 class="title">
-            <img src="/static/spider.svg" height="30px" width="30px" style="margin-top: -5px">
-            Aparker
+            <img src="/static/spider.svg" height="30px" width="30px" style="margin-bottom: -5px;">
+            Crawl.sh
           </h1>
         </div>
         <div>
