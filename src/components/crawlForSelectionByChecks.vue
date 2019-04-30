@@ -9,11 +9,34 @@
           <h class="totalStep">/&nbsp;&nbsp;2</h>
         </h1>
         <el-checkbox-group v-model="checkVal">
-          <el-checkbox :label="k"  v-for="(check, k) in checksInfo">{{ check }}</el-checkbox>
+          <el-checkbox :label="check"  v-for="(check, k) in checksInfo">{{ check }}</el-checkbox>
         </el-checkbox-group>
       </div>
-      <el-button style="margin-top: 20px">提交</el-button>
+      <el-button style="margin-top: 20px" @click="dialogPeriodJob = true">提交</el-button>
     </div>
+    <el-dialog
+      title="定时任务设置"
+      :visible.sync="dialogPeriodJob"
+      width="40%"
+    >
+      <span>
+          <el-radio v-model="isPeriodic" label="0">爬取一次</el-radio>
+          <el-radio v-model="isPeriodic" label="1">爬取多次</el-radio>
+          <div v-show="isPeriodic == '1'" style="margin-top: 20px;">
+            <h>时间间隔:&nbsp;&nbsp;&nbsp;</h>
+            <el-input-number v-model="interval" :min="1" :max="100"></el-input-number>
+          </div>
+          <div v-show="isPeriodic == '1'" style="margin-top: 20px;">
+            <h>尝试次数:&nbsp;&nbsp;&nbsp;</h>
+            <el-input-number v-model="maxRetry" :min="1" :max="100"></el-input-number>
+          </div>
+
+      </span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogPeriodJob = false">取 消</el-button>
+        <el-button type="primary" @click="submitJob">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -31,7 +54,11 @@
         msg: 'Welcome to Your Vue.js App',
         crawlMethodsInfo: null,
         checksInfo: [],
-        checkVal: []
+        checkVal: [],
+        isPeriodic: "0",
+        interval: '',
+        maxRetry: '',
+        dialogPeriodJob: false
       }
     },
     mounted(){
@@ -50,6 +77,37 @@
     },
     components: {
       container,
+    },
+    methods: {
+      submitJob(){
+        let userParamObj = JSON.parse(atob(this.$route.query.userParam));
+        userParamObj["info"]["requiredContent"] = this.checkVal;
+        let userParam = btoa(JSON.stringify(userParamObj));
+        let crawlMethod = this.$route.query.selectedMode;
+        let token = localStorage.getItem("token");
+        let periodicInfo = this.isPeriodic;
+        let period = this.interval;
+        let maxRetry = this.maxRetry;
+        let limit = "10";
+        let fd = new FormData();
+        fd.append('userParam', userParam);
+        fd.append('crawlMethod', crawlMethod);
+        fd.append('token', token);
+        fd.append('periodicInfo', periodicInfo);
+        fd.append('period', period);
+        fd.append('maxRetry', maxRetry);
+        fd.append('limit', limit);
+        axios.post(BASE_URL + 'crawlModule', fd).then(
+          (res) => {
+            if (res["data"] == 1){
+              this.$router.push({ name: 'History'});
+            } else {
+              alert("error")
+            }
+          }).catch((err) => {
+          console.log(err)
+        });
+      }
     },
     mixins: [coreContainer]
   }

@@ -10,7 +10,7 @@
         </h1>
         <crawlLinks v-show="showCrawlLinks"></crawlLinks>
         <crawlModules v-show="showCrawlModules"></crawlModules>
-
+        <crawlAll v-show="showCrawlWholeSites"></crawlAll>
       </div>
     </div>
   </div>
@@ -21,6 +21,8 @@
   import coreContainer from './coreContainer.vue'
   import crawlLinks from './crawlLinks.vue'
   import crawlModules from './crawlModules.vue'
+  import crawlAll from './crawlAll.vue'
+
 
   export default {
     name: 'HelloWorld',
@@ -49,7 +51,8 @@
     components: {
       container,
       crawlLinks,
-      crawlModules
+      crawlModules,
+      crawlAll
     },
     mixins: [coreContainer]
   }

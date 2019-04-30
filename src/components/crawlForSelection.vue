@@ -240,14 +240,75 @@
         }
       },
       submitJob(){
+        switch (Number(this.$route.query.selectedMode)) {
+          case 0:
+            this.submitCrawlLinks();
+            return
+          case 1:
+            this.submitCrawlAll();
+            return
+        }
+      },
+      submitCrawlLinks(){
         let crawlParam = btoa(JSON.stringify(this.getCrawlParamForSubmit()));
         let linkParam = this.$route.query.linkParam;
         let selenium = 0;
-        let token = token;
+        let token = localStorage.getItem("token");
         let crawlID = this.crawlID;
         let periodicInfo = this.isPeriodic;
         let period = this.interval;
         let maxRetry = this.maxRetry;
+        let fd = new FormData();
+        fd.append('crawlParam', crawlParam);
+        fd.append('linkParam', linkParam);
+        fd.append('selenium', selenium);
+        fd.append('token', token);
+        fd.append('crawlID', crawlID);
+        fd.append('periodicInfo', periodicInfo);
+        fd.append('period', period);
+        fd.append('maxRetry', maxRetry);
+        axios.post(BASE_URL + 'crawlLinks', fd).then(
+          (res) => {
+            if (res["data"] == 1){
+              this.$router.push({ name: 'History'});
+            } else {
+              alert("error")
+            }
+          }).catch((err) => {
+          console.log(err)
+        });
+      },
+      submitCrawlAll(){
+        let crawlParam = btoa(JSON.stringify(this.getCrawlParamForSubmit()));
+        let url = this.exampleLink;
+        let selenium = "0";
+        let token = localStorage.getItem("token");
+        let crawlID = this.crawlID;
+        let periodicInfo = this.isPeriodic;
+        let period = this.interval;
+        let maxRetry = this.maxRetry;
+        let limit = "10";
+        let fd = new FormData();
+        fd.append('crawlParam', crawlParam);
+        fd.append('url', url);
+        fd.append('selenium', selenium);
+        fd.append('token', token);
+        fd.append('crawlID', crawlID);
+        fd.append('periodicInfo', periodicInfo);
+        fd.append('period', period);
+        fd.append('maxRetry', maxRetry);
+        fd.append('limit', limit);
+
+        axios.post(BASE_URL + 'crawlWholeSite', fd).then(
+          (res) => {
+            if (res["data"] == 1){
+              this.$router.push({ name: 'History'});
+            } else {
+              alert("error")
+            }
+          }).catch((err) => {
+          console.log(err)
+        });
       }
     },
 
