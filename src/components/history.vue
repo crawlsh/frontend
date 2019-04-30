@@ -56,31 +56,44 @@
       return {
         msg: 'Welcome to Your Vue.js App',
         tableData: [],
-        loading: true
+        loading: true,
+        timer: null
       }
     },
     mounted(){
-      axios.get(BASE_URL + `getAllJobs?token=${localStorage.getItem('token')}`).then(
-        (res) => {
-          this.tableData = res["data"]
-          this.loading = false
-        }).catch((err) => {
-          console.log(err)
-      });
+      this.getTableData()
+      this.timer = setInterval(()=> {
+        if(!this.loading){
+          this.getTableData();
+        }
+      }, 2000)
     },
     methods: {
       timestampToTime: (timestamp)  =>{
-        var date = new Date(timestamp * 1000);
-        var Y = date.getFullYear() + '-';
-        var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-        var D = date.getDate() < 10 ? '0'+(date.getDate()) : date.getDate();
+        let date = new Date(timestamp * 1000);
+        let Y = date.getFullYear() + '-';
+        let M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        let D = date.getDate() < 10 ? '0'+(date.getDate()) : date.getDate();
         return Y+M+D;
       },
       goDetail(jobToken) {
         this.$router.push({ name: 'HistoryDetail', query: { jobToken: jobToken }});
+      },
+      getTableData(){
+        this.loading = true
+        axios.get(BASE_URL + `getAllJobs?token=${localStorage.getItem('token')}`).then(
+          (res) => {
+            this.tableData = res["data"]
+            this.loading = false
+          }).catch((err) => {
+          console.log(err)
+        });
       }
 
   },
+    destroyed() {
+      clearInterval(this.timer);
+    },
     components: {
       container,
       promo
