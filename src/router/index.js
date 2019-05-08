@@ -6,10 +6,17 @@ import CrawlSetting from '@/components/crawlSetting'
 import CrawlForSelection from '@/components/crawlForSelection'
 import CrawlForSelectionByChecks from '@/components/crawlForSelectionByChecks'
 import HistoryDetail from '@/components/historyDetail'
+import Pricing from '@/components/pricing'
+
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/pricing',
+      name: 'Pricing',
+      component: Pricing
+    },
     {
       path: '/historyDetail',
       name: 'HistoryDetail',
