@@ -13,8 +13,8 @@
     <transition name="el-fade-in-linear">
       <div v-show="shower" class="transition-box helpContainer">
         <div style="padding: 20px;">
-          <h1>Hi there 👋</h1>
-          <h3 style="font-weight: 100;">How can we help you?</h3>
+          <h1 style="color: #fff;">Hi there 👋</h1>
+          <h3 style="font-weight: 100;color: #fff;">How can we help you?</h3>
 
           <div class="descContainer">
             <form style="padding: 20px;margin-bottom: 40px;" v-show="showForm">
@@ -26,7 +26,7 @@
                         placeholder="Your website is like shit!!"></el-input>
               <p>Rate Us</p>
               <el-rate v-model="rating" style="margin-bottom: 20px;"></el-rate>
-              <el-button style="float: right;" type="success" @click="handleSubmit">Submit</el-button>
+              <el-button style="float: right;" type="primary" @click="handleSubmit">Submit</el-button>
             </form>
             <form style="padding: 20px;margin-bottom: 40px;text-align: center;" v-show="!showForm">
               <i class="el-icon-ice-cream-round successIcon"></i>
@@ -48,6 +48,7 @@
   import coreContainer from './coreContainer.vue'
   import axios from 'axios'
   import BASE_URL from '../config'
+
   export default {
         name: "container",
       components: {
@@ -101,21 +102,18 @@
     right: 0;
     width: 100%;
     height: 680px;
-    background:
-      /*1*/ radial-gradient(ellipse at center, rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%),
-      /*2*/ radial-gradient(ellipse at 70% 60%, rgba(195,224,96,1) 0%,rgba(195,224,96,0) 30%),
-      /*3*/ radial-gradient(ellipse at bottom left, rgba(0,163,203,1) 0%, rgba(0,163,203,0) 70%),
-      /*4*/ linear-gradient(135deg, rgba(18,46,119,0) 0%,rgba(18,46,119,0) 75%,rgba(18,46,119,1) 100%),
-      /*5*/ linear-gradient(to right, rgba(98,87,147,1) 0%, rgba(213,93,100,1) 17%, rgba(228,145,41,1) 74%, rgba(192,103,28,1) 100%);
-    background-blend-mode:
-      /*1*/ screen,
-      /*2*/ hue,
-      /*3*/ color,
-      /*4*/ overlay,
-      /*5*/ normal;
+    background: linear-gradient(45deg , #FF3706,#FFDC18, #27DBB1, #24AADB,#E94584);
+    background-size: 250% 100%;
+    animation: gradient 1000s linear infinite;
+    animation-direction: alternate;
     position: absolute;
     z-index: -1;
     transform: skewY(8deg);
+  }
+  @keyframes gradient {
+    0% {background-position: 85%}
+    100% {background-position: 85%}
+
   }
   .helper{
     text-align: center;
@@ -157,7 +155,15 @@
     z-index: 10000;
   }
   .helpBkg{
-    background: url("https://js.intercomcdn.com/images/background-7.390b24b1.png");
+    background-image: repeating-linear-gradient(135deg,
+      #2B3284 /*0px*/, #2B3284 100px,
+      #4177BC 100px, #4177BC 105px,
+      #2B3284 105px, #2B3284 130px,
+      #4177BC 130px, #4177BC 260px,
+      #FFFFFF 260px, #FFFFFF 265px,
+      #4177BC 265px, #4177BC 270px,
+      #FFFFFF 270px, #FFFFFF 330px
+    );
     position: fixed;
     width: 382px;
     height: 300px;

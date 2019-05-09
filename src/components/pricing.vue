@@ -8,7 +8,7 @@
           <p><i class="el-icon-check" style="color: green;"></i> {{desc}}</p>
           <div class="line" v-show="k < free.length - 1"></div>
         </div>
-        <el-button type="success" style="margin-top: 20px;" plain>开始使用</el-button>
+        <el-button type="success" style="margin-top: 20px;" plain @click="goHome">开始使用</el-button>
       </div>
       <div class="priceContainer">
         <div style="display: flex;">
@@ -19,7 +19,6 @@
           <div class="line" v-show="k < paid.length - 1"></div>
         </div>
         <el-button type="success" style="margin-top: 20px;">支付</el-button>
-
       </div>
       <div class="priceContainer" style="margin-left: 20px; height: max-content;">
         <h1>联系我们</h1>
@@ -28,7 +27,6 @@
           <div class="line" v-show="k < contact.length - 1"></div>
         </div>
         <el-button type="success" style="margin-top: 20px;">留言</el-button>
-
       </div>
 
     </div>
@@ -40,6 +38,7 @@
   import coreContainer from './coreContainer.vue'
   import axios from 'axios'
   import BASE_URL from '../config'
+  import router from '../router'
   export default {
     name: "pricing",
     mixins: [coreContainer],
@@ -49,6 +48,11 @@
         free: ["多IP匿名爬取", "被墙网站爬取", "语义分析"],
         paid: ["更快的速度", "无限制爬取", "设置定时爬取", "语义分类/概括"],
         contact: ["本地部署", "破解高级反爬虫机制", "实现登陆", "更多..."]
+      }
+    },
+    methods: {
+      goHome(){
+        router.push('/')
       }
     }
 

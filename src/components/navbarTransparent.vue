@@ -1,11 +1,11 @@
 <template>
   <ul class="navbarBadges navbar">
-    <li class="navItem">
-      <a class="navButton" @click="goHome">首页</a>
-      <a class="navButton" @click="goIntro">帮助</a>
-      <a class="navButton" @click="goPricing">价格</a>
-      <a class="navButton" @click="goHistory" v-show="hasLogin">历史记录</a>
-      <a class="navButton" @click="showAddAnalysis = true" v-show="hasLogin" >设置分析规则</a>
+    <li class="navItem" >
+      <a class="navButton" @click="goHome" style="cursor:pointer;">首页</a>
+      <a class="navButton" @click="goIntro" style="cursor:pointer;">帮助</a>
+      <a class="navButton" @click="goPricing" style="cursor:pointer;">价格</a>
+      <a class="navButton" @click="goHistory" v-show="hasLogin" style="cursor:pointer;">历史记录</a>
+      <a class="navButton" @click="showAddAnalysis = true" v-show="hasLogin" style="cursor:pointer;">设置分析规则</a>
 
     </li>
     <li class="leftItem" v-show="!hasLogin">
@@ -192,7 +192,7 @@
         router.push('history')
       },
       goPricing(){
-        alert(store.state.token)
+        router.push('pricing')
       },
       goIntro(){
 
@@ -292,6 +292,7 @@
 
   }
   .navButton:hover{
+
     color: #333;
     margin-right: 20px;
     border-style: solid;

@@ -34,7 +34,7 @@
              <ol class="total">
                  <li class="countDetails">4</li>
                  <li class="countDetails">0</li>
-                 <span class="quote">,</span>
+                 <span class="quote">&nbsp;,</span>
                  <li class="countDetails">7</li>
                  <li class="countDetails">5</li>
                  <li class="countDetails">3</li>
@@ -43,19 +43,29 @@
     <el-button class="btnGo startToUseButton" href="#">开始使用</el-button>
   </section>
   <section class="footerContainer">
-    <div class="container">
-      <div class="row about footer-xs">
-        <div class="col-lg-4 col-xs-12 col-md-3 col-sm-12 text-center mt-70">
+      <div class="row about footer-xs" style="display: flex;">
+        <div>
           <h1 class="title">
             <img src="/static/spider.svg" height="30px" width="30px" style="margin-bottom: -5px;">
             Crawl.sh
           </h1>
         </div>
-        <div>
 
+        <div class="linkingContainer">
+          <a class="linking" href="https://docs.crawl.sh/#/en/Crawl">使用文档</a><br>
+          <a class="linking" href="#">联系方式</a><br>
+          <a class="linking" href="#">合作</a><br>
+        </div>
+        <div class="linkingContainer">
+          <a class="linking" href="https://docs.crawl.sh/#/?id=1">服务条款</a><br>
+          <a class="linking" href="https://docs.crawl.sh/#/?id=security">隐私策略</a><br>
+          <a class="linking" href="https://docs.crawl.sh/#/?id=security">安全</a><br>
+        </div>
+        <div class="linkingContainer">
+          <a class="linking" href="https://zwang.tech">关于我们</a><br>
+          <a class="linking" href="https://docs.crawl.sh/#/?id=cases">客户案例</a><br>
         </div>
       </div>
-    </div>
   </section>
   </div>
 </template>
@@ -169,8 +179,9 @@
   .countDetails{
     float: left;
     padding-left: 2px;
+    padding-right: 1.5px;
+    padding-top: 3px;
     margin-left: 5px;
-    margin-right: 5px;
     width: 24px;
     height: 32px;
     border: 1px solid #ccc;
@@ -201,12 +212,17 @@
   }
   .footerContainer{
     margin-top: 100px;
-    background: #f7f1e3;
+    box-shadow: 0 0 5px 0 rgba(228,228,228,.5), 0 0 14px 0 #ccc;
     color: #000;
-    padding: 100px;
+    background: rgba(238,238,238, .7);
+    padding: 80px;
+  }
+  .linkingContainer{
+    margin-left: 100px;
+    display: block;
   }
   .linking{
-    color: #000;
+    color: #4b4b4b;
     text-decoration: none;
   }
   .linking:hover{

@@ -28,7 +28,6 @@
     name: 'HelloWorld',
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App',
         showCrawlLinks: 0,
         showCrawlWholeSites: 0,
         showCrawlModules: 0
