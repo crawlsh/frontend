@@ -163,7 +163,7 @@
     overflow-x: hidden;
 
     height: 600px;
-    width: 25%;
+    width: 250px;
     padding: 20px 40px;
   }
   .rightContainer{

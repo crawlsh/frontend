@@ -43,13 +43,16 @@
     <el-button class="btnGo startToUseButton" href="#">开始使用</el-button>
   </section>
   <section class="footerContainer">
-      <div class="row about footer-xs" style="display: flex;">
-        <div>
-          <h1 class="title">
-            <img src="/static/spider.svg" height="30px" width="30px" style="margin-bottom: -5px;">
-            Crawl.sh
-          </h1>
-        </div>
+    <div class="footerContent">
+      <div style="text-align: center;">
+        <h1 style="font-size: 40px" class="title">
+          这就是Crawl.sh👏
+        </h1>
+        <el-button href="#" style="margin-left: 11px;margin-bottom: 40px;width: 150px;">开始使用</el-button>
+      </div>
+
+      <el-divider style="width: 20px;"></el-divider>
+      <div style="display: flex;justify-content:center;">
 
         <div class="linkingContainer">
           <a class="linking" href="https://docs.crawl.sh/#/en/Crawl">使用文档</a><br>
@@ -61,18 +64,47 @@
           <a class="linking" href="https://docs.crawl.sh/#/?id=security">隐私策略</a><br>
           <a class="linking" href="https://docs.crawl.sh/#/?id=security">安全</a><br>
         </div>
-        <div class="linkingContainer">
+        <div class="linkingContainer rightLinkingContainer">
           <a class="linking" href="https://zwang.tech">关于我们</a><br>
           <a class="linking" href="https://docs.crawl.sh/#/?id=cases">客户案例</a><br>
         </div>
       </div>
+      <p class="copyright">© 2019 Zhanwang Tech.</p>
+    </div>
   </section>
   </div>
 </template>
 
 <script>
     export default {
-        name: "promo"
+        name: "promo",
+      data(){
+          return {
+            comment: [
+              {
+                img: "http://45.77.219.192/assets/testimonial-jet-logo.png",
+                text: "“We use Buyer-Test at least every other day to identify areas of improvement across all " +
+                  "shopping experiences. It’s helped us double our desktop " +
+                  "conversion rate and increase shopping basket sizes by 8 percent.”",
+                by: "@ Shou C"
+              },
+              {
+                img: "http://45.77.219.192/assets/testimonial-jet-logo.png",
+                text: "“We use Buyer-Test at least every other day to identify areas of improvement across all " +
+                  "shopping experiences. It’s helped us double our desktop " +
+                  "conversion rate and increase shopping basket sizes by 8 percent.”",
+                by: "Shou C"
+              },
+              {
+                img: "http://45.77.219.192/assets/testimonial-jet-logo.png",
+                text: "“We use Buyer-Test at least every other day to identify areas of improvement across all " +
+                  "shopping experiences. It’s helped us double our desktop " +
+                  "conversion rate and increase shopping basket sizes by 8 percent.”",
+                by: "Shou C"
+              }
+            ]
+          }
+      }
     }
 </script>
 
@@ -210,24 +242,41 @@
     background-color: #ff9f43;
     color: #fff;
   }
+  .commentBkg{
+    position:absolute;
+
+    height: 200px;
+    width: 100%;
+    background-color: #3884ff;
+    transform: skew(0deg, -2deg);
+  }
   .footerContainer{
-    margin-top: 100px;
-    box-shadow: 0 0 5px 0 rgba(228,228,228,.5), 0 0 14px 0 #ccc;
-    color: #000;
-    background: rgba(238,238,238, .7);
-    padding: 80px;
+    margin-top: 200px;
+    padding: 100px;
+    background: linear-gradient(-160deg, #24AADB 20%, #E94584 100%);
+    color: #fff;
   }
   .linkingContainer{
-    margin-left: 100px;
+    margin-top: 40px;
+    margin-right: 100px;
     display: block;
   }
+  .rightLinkingContainer{
+    margin-right: 0;
+  }
   .linking{
-    color: #4b4b4b;
+    color: #fff;
     text-decoration: none;
   }
   .linking:hover{
-    color: #666;
+    color: #ddd;
     text-decoration: none;
+  }
+  .copyright{
+    margin-top: 50px;
+    text-align: center;
+    font-size: 15px;
+    color: #ccc;
   }
 
   ol{

@@ -102,7 +102,7 @@
     right: 0;
     width: 100%;
     height: 680px;
-    background: linear-gradient(45deg , #FF3706,#FFDC18, #27DBB1, #24AADB,#E94584);
+    background: linear-gradient(52deg, #FF3706,#FFDC18, #27DBB1, #24AADB,#E94584);
     background-size: 250% 100%;
     animation: gradient 1000s linear infinite;
     animation-direction: alternate;
@@ -124,10 +124,11 @@
     width: 60px;
     height: 60px;
     cursor: pointer;
-    background: linear-gradient(90deg, #29bdd9 0%, #276ace 100%);
+    background: #03a84e;
     box-shadow: 0 3px 26px 0 rgba(0,0,0,0.20);
     border-radius: 50%;
     overflow: hidden;
+    z-index: 20000;
   }
   .helpButton{
     margin-top: 11.5px;
