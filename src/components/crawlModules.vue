@@ -50,13 +50,16 @@
         endID: 0,
         amount: 0,
         time: 0,
+        isTesting: 0
       }
     },
     mounted(){
       this.currentModule = this.$route.query.selectedMode;
+      this.isTesting = this.$route.query.isTesting;
+      this.localServer = "http://127.0.0.1:" + this.$route.query.port + "/";
       let crawlMethodsInfo = store.state.crawlMethodsInfo;
-      if (store.state.crawlMethodsInfo){
-        axios.get(BASE_URL + "getCrawlMethods").then((res) => {
+      if (!store.state.crawlMethodsInfo || this.isTesting){
+        axios.get((this.isTesting ? this.localServer : BASE_URL) + "getCrawlMethods").then((res) => {
           store.commit("setCrawlMethodsInfo", res["data"]);
           this.crawlMethodsInfo = res["data"][this.currentModule]
           this.showRadios();
@@ -98,7 +101,10 @@
         }
         this.$router.push({ name: 'CrawlForSelectionByChecks', query: {
           userParam: btoa(JSON.stringify(userParam)),
-          selectedMode: this.$route.query.selectedMode
+          selectedMode: this.$route.query.selectedMode,
+          isTesting: this.isTesting,
+          crawlMethodsInfo: btoa(JSON.stringify(this.crawlMethodsInfo)),
+          localServer: (this.isTesting ? this.localServer : 0),
          }});
       }
 

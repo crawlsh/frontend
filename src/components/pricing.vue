@@ -18,7 +18,27 @@
           <p><i class="el-icon-check" style="color: green;"></i> {{desc}}</p>
           <div class="line" v-show="k < paid.length - 1"></div>
         </div>
-        <el-button type="success" style="margin-top: 20px;">支付</el-button>
+
+        <el-button type="success" style="margin-top: 20px;"
+                   v-show="showPay"
+                   @click="payMethodDialog = true">支付</el-button>
+        <el-button disabled type="info" style="margin-top: 20px;margin-left: 0;"
+                   v-show="!showPay">已购买</el-button>
+        <el-dialog
+          title="选择支付方式"
+          :visible.sync="payMethodDialog"
+          width="30%"
+          :before-close="handleClose">
+          <span>
+            <a :href="backend + '/startPaypal'" target="_blank">
+              <img src="https://cdn-bucket.ibkiller.com/img/PayPal.svg" >
+            </a>
+            <a :href="backend + '/startAlipay'" target="_blank">
+              <img src="https://cdn-bucket.ibkiller.com/img/AliPay_logo.svg" height="35px" width="125px">
+            </a>
+          </span>
+
+        </el-dialog>
       </div>
       <div class="priceContainer" style="margin-left: 20px; height: max-content;">
         <h1>联系我们</h1>
@@ -47,14 +67,47 @@
       return {
         free: ["多IP匿名爬取", "被墙网站爬取", "语义分析"],
         paid: ["更快的速度", "无限制爬取", "设置定时爬取", "语义分类/概括"],
-        contact: ["本地部署", "破解高级反爬虫机制", "实现登陆", "更多..."]
+        contact: ["本地部署", "破解高级反爬虫机制", "实现登陆", "更多..."],
+        payMethodDialog: false,
+        showPay: true,
+        backend: BASE_URL
       }
     },
     methods: {
       goHome(){
         router.push('/')
+      },
+      startChecking(){
+        axios.get(BASE_URL + 'isVIP?userToken=' + localStorage.getItem("token")).then(
+          (res) => {
+            if (res["data"]["success"]){
+              localStorage.setItem("isVIP", res["data"]["info"]);
+              if (res["data"]["info"]){
+                this.payMethodDialog = false
+                this.showPay = false
+                this.$alert('你已经是VIP啦，请不要重复购买！', '成功！', {
+                  confirmButtonText: '返回',
+                });
+                this.stopChecking();
+              }
+            }
+          }).catch((err) => {
+          console.log(err)
+        });
+      },
+      stopChecking(){
+        clearInterval(this.timer);
       }
-    }
+    },
+    mounted() {
+      this.startChecking()
+      this.timer = setInterval(()=> {
+        this.startChecking()
+      }, 2000)
+    },
+    destroyed() {
+      this.stopChecking();
+    },
 
   }
 </script>

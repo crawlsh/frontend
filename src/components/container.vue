@@ -124,7 +124,7 @@
     width: 60px;
     height: 60px;
     cursor: pointer;
-    background: #03a84e;
+    background: #2c3e50;
     box-shadow: 0 3px 26px 0 rgba(0,0,0,0.20);
     border-radius: 50%;
     overflow: hidden;

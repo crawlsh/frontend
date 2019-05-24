@@ -7,6 +7,10 @@
         <el-tree :data="urlInfo">
           <span style="width: 100%;" slot-scope="{ node, data }" @click="showInfo(node)">
             <span>{{ cutShort(node.data["url"]) }}</span>
+            <span>
+            <el-tag type="danger"
+              v-show="!node.data['success']" size="mini" >Error</el-tag>
+        </span>
           </span>
         </el-tree>
       </div>
@@ -71,15 +75,19 @@
       axios.get(BASE_URL + "getResult?jobToken=" +
         this.$route.query.jobToken).then((res) => {
         this.urlInfo = res["data"]["info"];
-        let children = [];
-        for (let i in this.urlInfo[0]["content"]){
-          children.push(
-            {url: this.urlInfo[0]["content"][i]["name"]}
-          )
-        }
+
         for (let j in this.urlInfo){
+          let children = [];
+          for (let i in this.urlInfo[j]["content"]){
+            children.push(
+              {url: this.urlInfo[j]["content"][i]["name"],
+               success: !(this.urlInfo[j]["content"][i]["content"]==="")}
+            )
+          }
           this.urlInfo[j]["children"] = children
         }
+        console.log(this.urlInfo)
+
       })
       let fd = new FormData();
       fd.append('token', localStorage.getItem("token"));
@@ -115,6 +123,7 @@
           let parentNode = content["parent"]["data"]
           let currentNode = this.getDataByName(parentNode, name)
           if (currentNode["content"]===""){
+            console.log(currentNode)
             alert("UNSUCCESS")
             return;
           }

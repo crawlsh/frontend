@@ -51,35 +51,27 @@
     name: 'HelloWorld',
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App',
         crawlMethodsInfo: null,
         checksInfo: [],
         checkVal: [],
         isPeriodic: "0",
         interval: '',
         maxRetry: '',
+        isTesting: '',
         dialogPeriodJob: false
       }
     },
     mounted(){
-      this.currentModule = this.$route.query.selectedMode;
-      let crawlMethodsInfo = store.state.crawlMethodsInfo;
-      if (store.state.crawlMethodsInfo){
-        axios.get(BASE_URL + "getCrawlMethods").then((res) => {
-          store.commit("setCrawlMethodsInfo", res["data"]);
-          this.crawlMethodsInfo = res["data"][this.currentModule]
-          this.checksInfo = this.crawlMethodsInfo["requirement"]["info"]["labels"];
-        })
-      } else {
-        this.crawlMethodsInfo = crawlMethodsInfo[this.currentModule]
-        this.checksInfo = this.crawlMethodsInfo["requirement"]["info"]["labels"];
-      }
+      this.isTesting = this.$route.query.isTesting;
+      this.crawlMethodsInfo = JSON.parse(atob(this.$route.query.crawlMethodsInfo));
+      this.checksInfo = this.crawlMethodsInfo["requirement"]["info"]["labels"];
+      this.localServer = this.$route.query.localServer;
     },
     components: {
       container,
     },
     methods: {
-      submitJob(){
+      submitJob() {
         let userParamObj = JSON.parse(atob(this.$route.query.userParam));
         userParamObj["info"]["requiredContent"] = this.checkVal;
         let userParam = btoa(JSON.stringify(userParamObj));
@@ -97,10 +89,10 @@
         fd.append('period', period);
         fd.append('maxRetry', maxRetry);
         fd.append('limit', limit);
-        axios.post(BASE_URL + 'crawlModule', fd).then(
+        axios.post((this.isTesting ? this.localServer : BASE_URL) + 'crawlModule', fd).then(
           (res) => {
-            if (res["data"] == 1){
-              this.$router.push({ name: 'History'});
+            if (res["data"] == 1) {
+              this.$router.push({name: 'History'});
             } else {
               alert("error")
             }
