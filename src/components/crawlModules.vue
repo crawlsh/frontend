@@ -1,33 +1,33 @@
 <template>
   <div>
     <el-radio-group v-model="radio">
-      <el-radio :label="1" v-show="isCrawlByIDAvailable">通过ID爬取</el-radio>
-      <el-radio :label="3" v-show="isCrawlByOrderAvailable">随机爬取</el-radio>
-      <el-radio :label="2" v-show="isCrawlByTimeAvailable">通过时间爬取</el-radio>
+      <el-radio :label="1" v-show="isCrawlByIDAvailable">{{ $t('m.CrawlByID')}}</el-radio>
+      <el-radio :label="3" v-show="isCrawlByOrderAvailable">{{ $t('m.CrawlByRandom')}}</el-radio>
+      <el-radio :label="2" v-show="isCrawlByTimeAvailable">{{ $t('m.CrawlByTime')}}</el-radio>
     </el-radio-group>
     <div style="margin-top: 20px;">
       <div v-show="radio === 1">
         <h>ID：  </h>
         <el-input-number v-model="startID"></el-input-number>
-        <h>至</h>
+        <h>-</h>
         <el-input-number v-model="endID"></el-input-number>
       </div>
       <div v-show="radio === 2">
-          <span class="demonstration">时间：  </span>
+          <span class="demonstration">{{ $t('m.Time')}}：  </span>
           <el-date-picker
             v-model="time"
             type="monthrange"
-            range-separator="至"
-            start-placeholder="开始月份"
-            end-placeholder="结束月份" class="font-family: 'Avenir', Helvetica, Arial, sans-serif;">
+            range-separator="-"
+            :start-placeholder="$t('m.StartDate')"
+            :end-placeholder="$t('m.EndDate')" class="font-family: 'Avenir', Helvetica, Arial, sans-serif;">
           </el-date-picker>
       </div>
       <div v-show="radio === 3">
-        <h>数量：  </h>
+        <h>{{$t('m.Amount')}}：  </h>
         <el-input-number v-model="amount"></el-input-number>
       </div>
     </div>
-    <el-button style="margin-top: 20px;" @click="nextStep">下一步</el-button>
+    <el-button style="margin-top: 20px;" @click="nextStep">{{$t('m.Next')}}</el-button>
   </div>
 </template>
 

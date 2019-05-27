@@ -3,7 +3,7 @@
     <container></container>
     <div style="display: flex;justify-content:center;margin-bottom: 50px;">
       <div class="container leftContainer">
-        <span class="tocLabel">目录</span>
+        <span class="tocLabel">{{ $t('m.TOC' )}}</span>
         <el-tree :data="urlInfo">
           <span style="width: 100%;" slot-scope="{ node, data }" @click="showInfo(node)">
             <span>{{ cutShort(node.data["url"]) }}</span>
@@ -16,20 +16,20 @@
       </div>
       <div class="container rightContainer">
         <div class="buttonContainer">
-          <el-button>复制带格式内容</el-button>
-          <el-button>复制无格式内容</el-button>
-          <el-button>复制网址</el-button>
+          <el-button>{{ $t('m.Copy' )}}{{ $t('m.WithStyle' )}}</el-button>
+          <el-button>{{ $t('m.Copy' )}}{{ $t('m.WOStyle' )}}</el-button>
+          <el-button>{{ $t('m.Copy' )}}{{ $t('m.link' )}}</el-button>
           <div class="line"></div>
           <el-button @click="showAnalysis('sentiment')"
-                     style="margin-bottom: 10px;margin-left: 0; margin-right: 10px;">情感分析</el-button>
+                     style="margin-bottom: 10px;margin-left: 0; margin-right: 10px;">{{ $t('m.Sentiment' )}}</el-button>
           <el-button @click="showAnalysis('summary')"
-                     style="margin-bottom: 10px;margin-left: 0; margin-right: 10px;">文本简介</el-button>
+                     style="margin-bottom: 10px;margin-left: 0; margin-right: 10px;">{{ $t('m.Summary' )}}</el-button>
           <el-button v-for='v in buttonInfo' @click="showAnalysis(v)"
                      style="margin-bottom: 10px;margin-left: 0; margin-right: 10px;">{{ v }}</el-button>
         </div>
         <el-alert v-show="showMsg">{{alertMsg}}</el-alert>
         <div>
-          <h3>带格式内容</h3>
+          <h3>{{ $t('m.WithStyle' )}}</h3>
           <div class="browserContent">
             <div class="ball ballGreen"></div>
             <div class="ball ballYellow"></div>
@@ -43,7 +43,7 @@
           </iframe>
         </div>
         <div>
-          <h3>无格式内容</h3>
+          <h3>{{ $t('m.WOStyle' )}}</h3>
           <el-input type="textarea" disabled :value="unstyledContent" :autosize="{ minRows: 2, maxRows: 20}"></el-input>
         </div>
       </div>

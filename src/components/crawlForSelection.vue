@@ -4,11 +4,24 @@
     <div class="searchContainer">
       <div>
         <h1 class="title">
-          <h class="step">步骤</h>
+          <h class="step">{{ $t('m.Step') }}</h>
           <h class="step">2</h>
           <h class="totalStep">/&nbsp;&nbsp;2</h>
         </h1>
       </div>
+      <el-alert title="注意！"
+                type="info"
+      >
+        为了您的账号安全，我们将网站的脚本以及格式内容删除了。如果没有看见所要爬取的内容，您可以点击如下按钮或联系我们。
+        <br><br>
+        <el-switch
+          v-model="usingSelenium"
+          @change="switchToSelenium"
+        >
+        </el-switch>
+        <proBadge></proBadge>
+      </el-alert>
+      <br>
       <div class="browserContent">
         <div class="ball ballGreen"></div>
         <div class="ball ballYellow"></div>
@@ -17,7 +30,7 @@
       <div class="linkContent">
         <p class="link">{{ exampleLink }}</p>
       </div>
-      <iframe class="iframeFS" :src="FSFrameLink"></iframe>
+      <iframe class="iframeFS" :src="FSFrameLink" id="cfsFrame"></iframe>
       <el-table
         :data="crawlParam"
         style="width: 100%;margin-top: 20px;"
@@ -26,17 +39,17 @@
       >
         <el-table-column
           prop="name"
-          label="名称"
+          :label="$t('m.Name')"
           sortable>
         </el-table-column>
         <el-table-column
           prop="exampleContent"
-          label="内容"
+          :label="$t('m.Time')"
           sortable>
         </el-table-column>
         <el-table-column
           prop="id"
-          label="设置">
+          :label="$t('m.Setting')">
           <template slot-scope="scope">
             <el-button @click="startChangeCrawlParam(scope.row.id)">修改</el-button>
             <el-button type="primary" @click="delCrawlParam(scope.row.id)">删除</el-button>
@@ -46,47 +59,47 @@
       <el-button class="setPeriodicTaskButton" type="primary" @click="startSetPeriodic">设置定时任务</el-button>
     </div>
     <el-dialog
-      title="爬取内容设置"
+      :title="$t('m.CrawlParamSetting')"
       :visible.sync="dialogPopNotice"
       width="70%"
     >
       <span>
-        <p>内容</p>
+        <p>{{$t('m.Content')}}</p>
         <el-input
           v-model="HTMLString"
-          :disabled="true" type="textarea" :rows="20">
+          :disabled="true" type="textarea" :rows="10">
         </el-input>
-        <p>名称</p>
+        <p>{{$t('m.Name')}}</p>
         <el-input
-          v-model="HTMLStringName" placeholder="好听一点哦">
+          v-model="HTMLStringName" :placeholder="$t('m.SoundGood')">
         </el-input>
       </span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogPopNotice = false">取 消</el-button>
-        <el-button type="primary" @click="confirmParam">确 定</el-button>
+        <el-button @click="dialogPopNotice = false">{{ $t('m.Cancel') }}</el-button>
+        <el-button type="primary" @click="confirmParam">{{ $t('m.Confirm') }}</el-button>
       </span>
     </el-dialog>
     <el-dialog
-      title="定时任务设置"
+      :title="$t('m.PeriodicTaskSetting')"
       :visible.sync="dialogPeriodJob"
       width="40%"
     >
       <span>
-          <el-radio v-model="isPeriodic" label="0">爬取一次</el-radio>
-          <el-radio v-model="isPeriodic" label="1">爬取多次</el-radio>
+          <el-radio v-model="isPeriodic" label="0">{{ $t('m.CrawlOnce') }}</el-radio>
+          <el-radio v-model="isPeriodic" label="1">{{ $t('m.CrawlMultiple') }}</el-radio>
           <div v-show="isPeriodic == '1'" style="margin-top: 20px;">
-            <h>时间间隔:&nbsp;&nbsp;&nbsp;</h>
+            <h>{{ $t('m.TimeInterval') }}:&nbsp;&nbsp;&nbsp;</h>
             <el-input-number v-model="interval" :min="1" :max="100"></el-input-number>
           </div>
           <div v-show="isPeriodic == '1'" style="margin-top: 20px;">
-            <h>尝试次数:&nbsp;&nbsp;&nbsp;</h>
+            <h>{{ $t('m.MaxRetry') }}:&nbsp;&nbsp;&nbsp;</h>
             <el-input-number v-model="maxRetry" :min="1" :max="100"></el-input-number>
           </div>
 
       </span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogPeriodJob = false">取 消</el-button>
-        <el-button type="primary" @click="submitJob">确 定</el-button>
+        <el-button @click="dialogPeriodJob = false">{{ $t('m.Cancel') }}</el-button>
+        <el-button type="primary" @click="submitJob">{{ $t('m.Confirm') }}</el-button>
       </span>
     </el-dialog>
 
@@ -100,6 +113,7 @@
   import axios from 'axios'
   import BASE_URL from '../config'
   import browserStyles from './browserStyles.vue'
+  import proBadge from './proBadge.vue'
 
   export default {
     name: 'HelloWorld',
@@ -119,7 +133,9 @@
         currentMode: '', //whether editing
         interval: '',
         maxRetry: '',
-        crawlID: ''
+        crawlID: '',
+        usingSelenium: 0,
+
       }
     },
     mounted(){
@@ -130,9 +146,15 @@
       this.startListen();
     },
     components: {
+      proBadge,
       container
     },
     methods: {
+      switchToSelenium(){
+        this.FSFrameLink = `${BASE_URL}crawlForSelectionHTML?url=${this.exampleLink}`+
+          `&token=${localStorage.getItem("token")}`+
+          `&selenium=${this.usingSelenium ? 1 : 0}`;
+      },
       clearInput(){
         this.HTMLStringName = '';
         this.currentID = '';
@@ -185,6 +207,8 @@
         this.dialogPopNotice = false;
         this.clearInput()
         this.updateTable()
+        let cfsFrame = document.getElementById('cfsFrame');
+        cfsFrame.contentWindow.postMessage({colorify:true, id: _id, name: name},'*');
       },
       delCrawlParam(_id){
         let deleteKey;
@@ -194,7 +218,9 @@
           }
         });
         this.crawlParam.splice(deleteKey,1);
-        this.updateTable()
+        this.updateTable();
+        let cfsFrame = document.getElementById('cfsFrame');
+        cfsFrame.contentWindow.postMessage({colorify:false, id: _id},'*');
       },
       startChangeCrawlParam(_id){
         this.currentMode = 1;

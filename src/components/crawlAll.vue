@@ -1,11 +1,11 @@
 <template>
   <div>
-    <p>输入任意一篇文章的链接</p>
+    <p>{{$t('m.RandomlyInputArticleLink')}}</p>
     <el-input
-              placeholder="链接"
+              :placeholder="$t('m.link')"
               clearable v-model="exampleLink">
     </el-input>
-    <el-button type="primary" class="submitButton" @click="nextStep">下一步</el-button>
+    <el-button type="primary" class="submitButton" @click="nextStep">{{ $t('m.Next') }}</el-button>
   </div>
 
 </template>

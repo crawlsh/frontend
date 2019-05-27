@@ -3,16 +3,16 @@
     <container></container>
     <div class="pricingContainer">
       <div class="priceContainer" style="margin-right: 20px; height: max-content;">
-        <h1>免费</h1>
+        <h1>{{ $t('m.FreePriceLabel') }}</h1>
         <div v-for="(desc, k) in free">
           <p><i class="el-icon-check" style="color: green;"></i> {{desc}}</p>
           <div class="line" v-show="k < free.length - 1"></div>
         </div>
-        <el-button type="success" style="margin-top: 20px;" plain @click="goHome">开始使用</el-button>
+        <el-button type="success" style="margin-top: 20px;" plain @click="goHome">{{ $t('m.StartToUse') }}</el-button>
       </div>
       <div class="priceContainer">
         <div style="display: flex;">
-          <h1>4800 元</h1><h1 class="month">/ 月</h1>
+          <h1>199 RMB</h1><h1 class="month">/ {{ $t('m.Week') }}</h1>
         </div>
         <div v-for="(desc, k) in paid">
           <p><i class="el-icon-check" style="color: green;"></i> {{desc}}</p>
@@ -21,11 +21,11 @@
 
         <el-button type="success" style="margin-top: 20px;"
                    v-show="showPay"
-                   @click="payMethodDialog = true">支付</el-button>
+                   @click="payMethodDialog = true">{{ $t('m.Pay') }}</el-button>
         <el-button disabled type="info" style="margin-top: 20px;margin-left: 0;"
-                   v-show="!showPay">已购买</el-button>
+                   v-show="!showPay">{{ $t('m.Bought') }}</el-button>
         <el-dialog
-          title="选择支付方式"
+          :title="$t('m.SelectPayMethod')"
           :visible.sync="payMethodDialog"
           width="30%"
           :before-close="handleClose">
@@ -41,12 +41,12 @@
         </el-dialog>
       </div>
       <div class="priceContainer" style="margin-left: 20px; height: max-content;">
-        <h1>联系我们</h1>
+        <h1>{{ $t('m.ContactUs') }}</h1>
         <div v-for="(desc, k) in contact">
           <p><i class="el-icon-check" style="color: green;"></i> {{desc}}</p>
           <div class="line" v-show="k < contact.length - 1"></div>
         </div>
-        <el-button type="success" style="margin-top: 20px;">留言</el-button>
+        <el-button type="success" style="margin-top: 20px;">{{ $t('m.LeaveMsg') }}</el-button>
       </div>
 
     </div>

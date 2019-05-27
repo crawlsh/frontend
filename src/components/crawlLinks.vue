@@ -3,30 +3,31 @@
     <div>
       <p>{{ $t('m.EnterLinkForComparisonDescription') }}</p>
       <el-input class="linkInput"
-                placeholder="第一个链接"
+                :placeholder="$t('m.Link1')"
                 clearable v-model="firstURL">
       </el-input>
       <el-input  class="linkInput"
-                 placeholder="第二个链接"
+                 :placeholder="$t('m.Link2')"
                  clearable v-model="secondURL">
       </el-input>
       <el-button type="primary" class="linkInput" plain @click="generateURLTemplate">比较</el-button>
     </div>
     <div class="paramInputContainer" v-show="showURLTemplates">
       <el-alert
-        title="链接模版："
+        :title="$t('m.LinkTemplate')"
         type="info"
         description=''
         class="paramInputForm"
         show-icon>
         <el-button type="text" class="urlTemplate">{{ URLTemplate }}</el-button>
+
       </el-alert>
       <div class="paramInputForm" v-for='(k, v) in URLParams.idParam'>
-        <p>参数{{ v }} <strong>{{ k }}</strong></p>
+        <p>{{ $t('m.Key') }}{{ v }} <strong>{{ k }}</strong></p>
         <div class="inputParamValueContainer">
           <el-input-number @change="setParam(v)"
                            v-model="form[v.toString() + 'a']"></el-input-number>
-          <h>至</h>
+          <h>-</h>
           <el-input-number @change="setParam(v)"
                            v-model="form[v.toString() + 'b']"></el-input-number>
         </div>
@@ -34,11 +35,11 @@
       <div style="margin-top: 20px;">
         <el-alert
           type="success" v-show="showPossibilityExample">
-          Possibility: {{ possibility }}<br>
-          Example: <el-link :href="example" target="_blank">{{ example }}</el-link>
+          {{ $t('m.Possibility') }}: {{ possibility }}<br>
+          {{ $t('m.Example') }}: <el-link :href="example" target="_blank">{{ example }}</el-link>
         </el-alert>
       </div>
-      <el-button type="primary" class="paramInputForm" @click="goCrawlForSelection">设置完成</el-button>
+      <el-button type="primary" class="paramInputForm" @click="goCrawlForSelection">{{ $t('m.Done') }}</el-button>
     </div>
   </div>
 </template>
@@ -209,6 +210,14 @@
           this.example = link;
         },
         goCrawlForSelection(){
+          if (localStorage.getItem('hasLogin') == 0){
+            this.$swal(this.$t("m.NotLoginError"), "", "error");
+            return 0;
+          }
+          if (this.possibility > 100){
+            this.$swal("爬取可能性过多，请缩小爬取范围", "", "error");
+            return 0;
+          }
           this.$router.push({
             name: 'CrawlForSelection', query: {
               selectedMode: 0,

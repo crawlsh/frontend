@@ -1,75 +1,77 @@
 <template>
   <ul class="navbarBadges navbar">
     <li class="navItem" >
-      <a class="navButton" @click="goHome" style="cursor:pointer;">首页</a>
-      <a class="navButton" @click="goIntro" style="cursor:pointer;">帮助</a>
-      <a class="navButton" @click="goPricing" style="cursor:pointer;">价格</a>
-      <a class="navButton" @click="goHistory" v-show="hasLogin" style="cursor:pointer;">历史记录</a>
-      <a class="navButton" @click="showAddAnalysis = true" v-show="hasLogin" style="cursor:pointer;">设置分析规则</a>
+      <a class="navButton" @click="goHome" style="cursor:pointer;">{{ $t('m.Home') }}</a>
+      <a class="navButton" @click="goPricing" style="cursor:pointer;">{{ $t('m.Pricing') }}</a>
+      <a class="navButton" @click="goHistory" v-show="hasLogin" style="cursor:pointer;">{{ $t('m.ViewJob') }}</a>
+      <a class="navButton" @click="showAddAnalysis = true" v-show="hasLogin" style="cursor:pointer;">{{ $t('m.SetRule') }}</a>
 
     </li>
     <li class="leftItem" v-show="!hasLogin">
-      <el-button class="navButtonLeft primaryButton" type="primary" v-on:click="startLogin">登陆</el-button>
-      <el-button class="navButtonLeft secondaryButton" type="primary" plain v-on:click="startRegister">注册</el-button>
+      <el-button class="navButtonLeft primaryButton" type="primary" v-on:click="startLogin">{{ $t('m.Login') }}</el-button>
+      <el-button class="navButtonLeft secondaryButton" type="primary"
+                 plain v-on:click="startRegister">{{ $t('m.Register') }}</el-button>
     </li>
     <li class="leftItem" v-show="hasLogin">
-      <el-button class="navButtonLeft secondaryButton" plain type="primary" v-on:click="logout">登出</el-button>
+      <el-button class="navButtonLeft secondaryButton"
+                 plain type="primary" v-on:click="logout">{{ $t('m.Logout') }}</el-button>
     </li>
     <el-dialog
-          title="登陆"
+          :title="$t('m.Login')"
           :visible.sync="displayLogin"
           width="60%"
           :before-close="clearAll">
       <el-alert type="error" :title="errorMsg" v-show="isLoginError"></el-alert>
-      <p class="inputLabel">Username / Email:</p>
+      <p class="inputLabel">{{$t("m.Username")}}/{{$t("m.Email")}}:</p>
       <el-input v-model="loginName" placeholder="tom@hanks.com"></el-input>
-      <p class="inputLabel">Password:</p>
-      <el-input v-model="loginPassword"></el-input>
+      <p class="inputLabel">{{$t("m.Password")}}:</p>
+      <el-input v-model="loginPassword" type="password"></el-input>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="clearAll">取 消</el-button>
-        <el-button type="primary" @click="submitLogin">登 陆</el-button>
+        <el-button @click="clearAll">{{ $t('m.Cancel') }}</el-button>
+        <el-button type="primary" @click="submitLogin">{{$t('m.Login')}}</el-button>
       </span>
     </el-dialog>
+
     <el-dialog
-      title="注册"
+      :title="$t('m.Register')"
       :visible.sync="displayRegister"
       width="60%"
       :before-close="clearAll">
       <el-alert :title="errorMsg" v-show="isRegisterError"
                 :type="successRegister ? 'success': 'error'"></el-alert>
-      <p class="inputLabel">Username:</p>
+      <p class="inputLabel">{{$t("m.Username")}}:</p>
       <el-input v-model="registerName" placeholder="tomhanks"></el-input>
-      <p class="inputLabel">Email:</p>
+      <p class="inputLabel">{{$t("m.Email")}}:</p>
       <el-input v-model="registerMail" placeholder="tom@hanks.com"></el-input>
-      <p class="inputLabel">Password:</p>
-      <el-input v-model="registerPassword"></el-input>
+      <p class="inputLabel">{{$t("m.Password")}}:</p>
+      <el-input v-model="registerPassword" type="password"></el-input>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="clearAll">取 消</el-button>
-        <el-button type="primary" @click="submitRegister">注 册</el-button>
+        <el-button @click="clearAll">{{$t('m.Cancel')}}</el-button>
+        <el-button type="primary" @click="submitRegister">{{ $t('m.Register') }}</el-button>
       </span>
     </el-dialog>
     <el-dialog
       :visible.sync="showAddAnalysis"
       width="60%" style="padding-top: 0;">
-      <h3>现有规则</h3>
+      <h3>{{ $t('m.CurrentRule') }}</h3>
       <span v-for="tag in availableRules" class="ruleContainer">
       {{tag}}
-      <el-button type="text" @click="delRules(tag)">删除</el-button>
+      <el-button type="text" @click="delRules(tag)">{{ $t('m.Delete') }}</el-button>
     </span>
       <el-alert v-show="availableRules.length===0">NO_CONTENT</el-alert>
       <div class="line"></div>
-      <h3>新建规则</h3>
-      <p class="inputLabel">名称</p>
+      <h3>{{ $t('m.NewRule') }}</h3>
+      <p class="inputLabel">{{ $t('m.Name') }}</p>
       <el-input v-model="name" placeholder="商务分类"></el-input>
-      <p class="inputLabel">规则</p>
+      <p class="inputLabel">{{ $t('m.Rule') }}</p>
       <el-input v-model="rules" type="textarea"></el-input>
       <div style="margin-top: 20px;">
-        <el-radio v-model="way" label="0">包含</el-radio>
-        <el-radio v-model="way" label="1">不包含</el-radio>
+        <el-radio v-model="way" label="0">{{ $t('m.Contain') }}</el-radio>
+        <el-radio v-model="way" label="1">{{ $t('m.NContain') }}</el-radio>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="showAddAnalysis = false">取 消</el-button>
-        <el-button type="primary" @click="addRule">添 加</el-button>
+        <el-button @click="showAddAnalysis = false">{{ $t('m.Cancel') }}</el-button>
+        <el-button type="primary" @click="addRule">{{ $t('m.Submit') }}</el-button>
       </span>
     </el-dialog>
   </ul>
@@ -157,6 +159,7 @@
       },
       loginSuccess(){
         this.hasLogin = 1;
+        localStorage.setItem("hasLogin", 1)
       },
       submitRegister(){
         let email = this.registerMail;

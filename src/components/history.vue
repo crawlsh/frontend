@@ -11,15 +11,15 @@
         :default-sort = "{prop: 'date', order: 'descending'}"
         v-loading="loading"
       >
-        <el-table-column prop="content" label="内容" sortable></el-table-column>
-        <el-table-column prop="time" label="时间" sortable>
+        <el-table-column prop="content" :label="$t('m.Content')" sortable></el-table-column>
+        <el-table-column prop="time" :label="$t('m.Time')" sortable>
           <template slot-scope="scope">
             <p>
               {{timestampToTime(scope.row.time)}}
             </p>
           </template>
         </el-table-column>
-        <el-table-column prop="time" label="进度">
+        <el-table-column prop="time" :label="$t('m.Progress')">
           <template slot-scope="scope">
             <c>
               <el-progress :percentage="scope.row.progress[0]"  status="text"></el-progress>
@@ -27,12 +27,16 @@
             </c>
           </template>
         </el-table-column>
-        <el-table-column label="查看任务">
+        <el-table-column :label="$t('m.ViewJob')">
           <template slot-scope="scope">
             <el-button
               @click.native.prevent="goDetail(scope.row.jobToken)"
               type="text">
-              查看任务
+              {{ $t('m.ViewJob') }}
+            </el-button>
+            <el-button
+              @click.native.prevent="del(scope.row.jobToken)"
+              type="text" icon="el-icon-delete">
             </el-button>
           </template>
         </el-table-column>
@@ -50,11 +54,8 @@
   import axios from 'axios'
   import BASE_URL from '../config'
   export default {
-    name: 'HelloWorld',
-
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App',
         tableData: [],
         loading: true,
         timer: null
@@ -88,6 +89,15 @@
           }).catch((err) => {
           console.log(err)
         });
+      },
+      del(id){
+        this.loading = true;
+        axios.get(BASE_URL + `deleteJob?jobToken=${id}`).then(
+          () => {
+            this.getTableData()
+          }).catch((err) => {
+          console.log(err)
+        });
       }
 
   },
@@ -102,7 +112,6 @@
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 

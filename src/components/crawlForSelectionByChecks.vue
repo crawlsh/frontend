@@ -4,7 +4,7 @@
     <div class="searchContainer">
       <div>
         <h1 class="title">
-          <h class="step">步骤</h>
+          <h class="step">{{ $t('m.Step') }}</h>
           <h class="step">2</h>
           <h class="totalStep">/&nbsp;&nbsp;2</h>
         </h1>
@@ -12,7 +12,7 @@
           <el-checkbox :label="check"  v-for="(check, k) in checksInfo">{{ check }}</el-checkbox>
         </el-checkbox-group>
       </div>
-      <el-button style="margin-top: 20px" @click="dialogPeriodJob = true">提交</el-button>
+      <el-button style="margin-top: 20px" @click="dialogPeriodJob = true">{{ $t('m.Submit') }}</el-button>
     </div>
     <el-dialog
       title="定时任务设置"
@@ -20,21 +20,21 @@
       width="40%"
     >
       <span>
-          <el-radio v-model="isPeriodic" label="0">爬取一次</el-radio>
-          <el-radio v-model="isPeriodic" label="1">爬取多次</el-radio>
+          <el-radio v-model="isPeriodic" label="0">{{ $t('m.CrawlOnce') }}</el-radio>
+          <el-radio v-model="isPeriodic" label="1">{{ $t('m.CrawlMultiple') }}</el-radio>
           <div v-show="isPeriodic == '1'" style="margin-top: 20px;">
-            <h>时间间隔:&nbsp;&nbsp;&nbsp;</h>
+            <h>{{ $t('m.TimeInterval') }}:&nbsp;&nbsp;&nbsp;</h>
             <el-input-number v-model="interval" :min="1" :max="100"></el-input-number>
           </div>
           <div v-show="isPeriodic == '1'" style="margin-top: 20px;">
-            <h>尝试次数:&nbsp;&nbsp;&nbsp;</h>
+            <h>{{ $t('m.MaxRetry') }}:&nbsp;&nbsp;&nbsp;</h>
             <el-input-number v-model="maxRetry" :min="1" :max="100"></el-input-number>
           </div>
 
       </span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogPeriodJob = false">取 消</el-button>
-        <el-button type="primary" @click="submitJob">确 定</el-button>
+        <el-button @click="dialogPeriodJob = false">{{ $t('m.Cancel') }}</el-button>
+        <el-button type="primary" @click="submitJob">{{ $t('m.Confirm') }}</el-button>
       </span>
     </el-dialog>
   </div>

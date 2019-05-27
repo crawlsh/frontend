@@ -4,7 +4,7 @@
     <div class="searchContainer">
       <div>
         <h1 class="title">
-          <h class="step">步骤</h>
+          <h class="step">{{$t('m.Step')}}</h>
           <h class="step">1</h>
           <h class="totalStep">/&nbsp;&nbsp;2</h>
         </h1>
@@ -25,7 +25,6 @@
 
 
   export default {
-    name: 'HelloWorld',
     data () {
       return {
         showCrawlLinks: 0,

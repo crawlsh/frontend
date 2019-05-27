@@ -3,33 +3,75 @@
   <section class="bkgIntro1Container">
     <i class="introIcon" data-feather="repeat"></i>
 
-    <h1 class="title">自定义爬取方式</h1>
+    <h1 class="title">我们的优势
+    </h1>
     <hr class="intro1Line">
-
     <div class="detailsContainer">
-      <div class="nodeContainer">
-        <h3 class="title">爬取全站</h3>
-        <div class="introText">融合了国内主流短信供应商与数字营销技术的智能短信产品线，提供专业短信送达服务，包括验证码、系统通知等行业短信，新品推广、会员活动等营销短信。</div>
-        <el-button class="btn btnGo" href="/doc">了解&nbsp;&nbsp;爬取全站</el-button>
+      <div class="tocContainer">
+        <div :class="'featuresContainer feature' + v.id" @mouseover="showFeature(v.id)" v-for="v in [
+          {name: '快速', id: 1, pic: '/static/zap.svg',desc: '爬取1w+篇文章仅需8分钟'},
+          {name: '文本分析', id: 2, pic: '/static/dollar-sign.svg',desc: '内置强大AI算法'},
+          {name: '安全', id: 3, pic: '/static/shield.svg',desc: '被爬网站无法追踪到用户'}]">
+          <div class="feature">
+            <img :src="v.pic" height="35px" width="35px" style="margin-top: 32.5px; margin-left: 15px;">
+            <div class="featuresText">
+              <span>{{v.name}}</span>
+              <br>
+              <span style="font-size: 15px;">{{v.desc}}</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="nodeContainer">
-        <h3 class="title">通过URL规则爬取</h3>
-        <div class="introText">野狗通信云的PaaS型实时数据通信产品线，提供底层数据的实时同步和分发能力，并解决相应运维问题。企业和开发者无需再为App的底层数据通信问题而担忧，可专注于业务及产品创新上。</div>
-        <el-button class="btn btnGo" href="/doc">了解&nbsp;&nbsp;链接爬取</el-button>
+      <div class="nodeContainer" style="text-align: left;">
+        <div v-show="isFeature1">
+          <mapContainer></mapContainer>
+          <p>我们在世界各地有上万台爬取服务器，每当收到爬取任务，系统会判断出网站访问速度最快的一百台服务器并进行爬取</p>
+        </div>
+        <div v-show="isFeature2">
+          <h3>例子</h3>
+          <div class="feature2Example">
+            <el-popover
+              placement="right-start"
+              title="分析结果"
+              width="200"
+              trigger="hover">
+              <h>情感：0.5001<br>总结：Crawl.sh 是一个爬虫网站</h>
+              <el-button slot="reference" type="text">Crawl.sh 是一个爬虫网站</el-button>
+            </el-popover>
+            <br>
+            <el-popover
+              placement="right-start"
+              title="分析结果"
+              width="200"
+              trigger="hover">
+              <h>情感：0.1491<br>总结：开发者是坏蛋</h>
+              <el-button slot="reference" type="text">这个网站的开发者是一个无恶不作的大坏蛋</el-button>
+            </el-popover>
+            <br>
+            <el-popover
+              placement="right-start"
+              title="分析结果"
+              width="200"
+              trigger="hover">
+              <h>情感：0.8736<br>总结：开发者捐献</h>
+              <el-button slot="reference" type="text">这个网站的开发者将盈利所得捐献给贫困山区</el-button>
+            </el-popover>
+          </div>
+          <p>我们采用爬取的海量数据训练机器学习模型，从而使自然语义分析更精准高效</p>
+        </div>
+        <div v-show="isFeature3">
+          <div style="background: #010e28;padding: 20px;border-radius: 20px;text-align: center;">
+            <img src="/static/safe.png" height="280px"/>
+          </div>
+          <p>{{$t("m.Feature3")}}</p>
+        </div>
+
       </div>
     </div>
   </section>
-  <section class="bkgIntro2Container">
-    <i data-feather="filter" class="introIcon"></i>
-    <h1 class=" title">自定义爬取内容</h1>
-    <hr class="intro1Line">
-    <div class="intro2Img"></div>
-    <div class="intro2Content">
-      <p class="introText">野狗通信云的PaaS型实时数据通信产品线</p>
-    </div>
-  </section>
+
   <section class="bkgFinalContainer">
-    <h2 class="title" style="margin-top: 100px">使用Aparker的企业已有</h2>
+    <h2 class="title" style="margin-top: 100px">使用Crawl.sh的用户已有</h2>
     <span class="count">
              <ol class="total">
                  <li class="countDetails">4</li>
@@ -40,18 +82,19 @@
                  <li class="countDetails">3</li>
              </ol>
         </span>
-    <el-button class="btnGo startToUseButton" href="#">开始使用</el-button>
+    <el-button class="btnGo startToUseButton" href="#">查看用户留言</el-button>
+  </section>
+  <section class="startUseContainer">
+    <div style="text-align: center;">
+      <h1 style="font-size: 40px" class="title">
+        这就是Crawl.sh👏
+      </h1>
+      <el-button href="#" style="margin-left: 11px;margin-bottom: 40px;width: 150px;">开始使用</el-button>
+    </div>
   </section>
   <section class="footerContainer">
-    <div class="footerContent">
-      <div style="text-align: center;">
-        <h1 style="font-size: 40px" class="title">
-          这就是Crawl.sh👏
-        </h1>
-        <el-button href="#" style="margin-left: 11px;margin-bottom: 40px;width: 150px;">开始使用</el-button>
-      </div>
 
-      <el-divider style="width: 20px;"></el-divider>
+    <div class="footerContent">
       <div style="display: flex;justify-content:center;">
 
         <div class="linkingContainer">
@@ -76,35 +119,39 @@
 </template>
 
 <script>
+  import { VueTyper } from 'vue-typer'
+  import mapContainer from "./map.vue"
     export default {
-        name: "promo",
+      name: "promo",
+
       data(){
           return {
-            comment: [
-              {
-                img: "http://45.77.219.192/assets/testimonial-jet-logo.png",
-                text: "“We use Buyer-Test at least every other day to identify areas of improvement across all " +
-                  "shopping experiences. It’s helped us double our desktop " +
-                  "conversion rate and increase shopping basket sizes by 8 percent.”",
-                by: "@ Shou C"
-              },
-              {
-                img: "http://45.77.219.192/assets/testimonial-jet-logo.png",
-                text: "“We use Buyer-Test at least every other day to identify areas of improvement across all " +
-                  "shopping experiences. It’s helped us double our desktop " +
-                  "conversion rate and increase shopping basket sizes by 8 percent.”",
-                by: "Shou C"
-              },
-              {
-                img: "http://45.77.219.192/assets/testimonial-jet-logo.png",
-                text: "“We use Buyer-Test at least every other day to identify areas of improvement across all " +
-                  "shopping experiences. It’s helped us double our desktop " +
-                  "conversion rate and increase shopping basket sizes by 8 percent.”",
-                by: "Shou C"
-              }
-            ]
+            isFeature1: true,
+            isFeature2: false,
+            isFeature3: false,
           }
-      }
+      },
+      methods: {
+        hideFeatures(){
+          this.isFeature1 = false
+          this.isFeature2 = false
+          this.isFeature3 = false
+
+        },
+        showFeature(id){
+          this.hideFeatures()
+          if (id == 1){
+            this.isFeature1 = true
+          }
+          if (id == 2){
+            this.isFeature2 = true
+          }
+          if (id == 3){
+            this.isFeature3 = true
+          }
+        }
+      },
+      components:{mapContainer, VueTyper}
     }
 </script>
 
@@ -127,69 +174,74 @@
     height: 40px;
     width: 40px;
   }
+  .feature2Example{
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 1px 1px 8px 0 #ccc;
+  }
+
   .detailsContainer{
-    width: 780px;
-    margin: 70px auto 0;
+    width: 1000px;
+    margin: 10px auto 0;
     padding-top: 43px;
     padding-bottom: 40px;
     background: #FFF;
-    /* -webkit-box-shadow: 0 0 5px 0 rgba(228,228,228,.5), 0 0 14px 0 rgba(227,227,227,.5); */
-    box-shadow: 0 0 5px 0 rgba(228,228,228,.5), 0 0 14px 0 rgba(227,227,227,.5);
-    border-radius: 10px;
     display: flex;
     z-index: 1000;
-
+  }
+  .tocContainer{
+    width: 200px;
+    padding-left: 35px;
+    padding-right: 35px;
+    width: 30%;
+    display: inline-block;
+  }
+  .featuresContainer{
+    border-radius: 10px;
+    height: 100px;
+    box-shadow: 0 0 5px 0 #ccc;
+    margin-top: 20px;
+  }
+  .feature1:hover{
+    border: 1px solid #6b5df4;
+    box-shadow: 0 2px 6px 0 #6b5df4;
+  }
+  .feature2:hover{
+    border: 1px solid #3ACEB5;
+    box-shadow: 0 2px 6px 0 #04BAA8;
+  }
+  .feature3:hover{
+    border: 1px solid #f4ad4d;
+    box-shadow: 0 2px 6px 0 #f4ad4d;
+  }
+  .feature {
+    display: flex;
+  }
+  .featuresText {
+    text-align: left;
+    float: left;
+    margin: 10px;
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  .featuresContainerSelected{
+    box-shadow: 0 0 5px 0 #000;
   }
   .nodeContainer{
     border-left: 1px dashed #e5e5e5;
-    border-right: 1px dashed #e5e5e5;
     padding-left: 35px;
     padding-right: 35px;
     width: 50%;
     display: inline-block;
   }
-  .introText{
-    font-size: 14px;
-    color: #969696;
-    letter-spacing: .23px;
-    line-height: 24px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    text-align: justify;
-  }
+
   .intro1Line{
     width: 100px;
     height: 1px;
     background-color: #666;
   }
-  .bkgIntro2Container{
-    text-align: center;
-    margin-top: 100px;
-  }
-  .intro2Img{
-    width: 780px;
-    height: 300px;
-    margin: 70px auto 0;
-    background: #ccc;
-    /* -webkit-box-shadow: 0 0 5px 0 rgba(228,228,228,.5), 0 0 14px 0 rgba(227,227,227,.5); */
-    box-shadow: 0 0 5px 0 rgba(228,228,228,.5), 0 0 14px 0 rgba(227,227,227,.5);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    display: flex;
-    z-index: 1000;
-  }
-  .intro2Content{
-    width: 780px;
-    margin: 70px auto 0;
-    margin-top: 0;
-    background: #fff;
-    /* -webkit-box-shadow: 0 0 5px 0 rgba(228,228,228,.5), 0 0 14px 0 rgba(227,227,227,.5); */
-    box-shadow: 0 0 5px 0 rgba(228,228,228,.5), 0 0 14px 0 rgba(227,227,227,.5);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    display: flex;
-    z-index: 1000;
-  }
+
+
   .bkgFinalContainer{
     text-align: center;
     margin-top: 100px;
@@ -242,18 +294,15 @@
     background-color: #ff9f43;
     color: #fff;
   }
-  .commentBkg{
-    position:absolute;
-
-    height: 200px;
-    width: 100%;
-    background-color: #3884ff;
-    transform: skew(0deg, -2deg);
+  .startUseContainer{
+    margin-top: 120px;
+    color: #fff;
+    background-color: #0652DD;
+    padding: 50px;
   }
   .footerContainer{
-    margin-top: 200px;
     padding: 100px;
-    background: linear-gradient(-160deg, #24AADB 20%, #E94584 100%);
+    background: #010e28;
     color: #fff;
   }
   .linkingContainer{

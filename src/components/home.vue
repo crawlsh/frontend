@@ -11,7 +11,7 @@
       <h3 style="margin-top: -25px">{{ $t('m.Description') }}</h3>
       <p>{{ $t('m.ModeSelection') }}</p>
       <div class="customSelect">
-        <el-select v-model="selectedMode" filterable placeholder="请选择" class="selectContainer">
+        <el-select v-model="selectedMode" filterable :placeholder="$t('m.PleaseSelect')" class="selectContainer">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -47,7 +47,13 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App',
       selectedMode: '',
-      options: [{
+      options: [],
+    }
+  },
+  mounted(){
+    axios.get(BASE_URL + "getCrawlMethods").then((res) => {
+      store.commit("setCrawlMethodsInfo", res["data"]);
+      this.options = [{
         value: "0",
         label: '按照链接爬取',
         description: ''
@@ -55,12 +61,7 @@ export default {
         value: "1",
         label: '全站爬取',
         description: ''
-      }],
-    }
-  },
-  mounted(){
-    axios.get(BASE_URL + "getCrawlMethods").then((res) => {
-      store.commit("setCrawlMethodsInfo", res["data"]);
+      }]
       for (let method in res["data"]){
         this.options.push({
           value: method,

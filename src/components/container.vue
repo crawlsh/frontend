@@ -13,25 +13,25 @@
     <transition name="el-fade-in-linear">
       <div v-show="shower" class="transition-box helpContainer">
         <div style="padding: 20px;">
-          <h1 style="color: #fff;">Hi there 👋</h1>
-          <h3 style="font-weight: 100;color: #fff;">How can we help you?</h3>
+          <h1 style="color: #fff;">{{ $t('m.HiThere') }} 👋</h1>
+          <h3 style="font-weight: 100;color: #fff;">{{ $t('m.HowToHelp') }}</h3>
 
           <div class="descContainer">
             <form style="padding: 20px;margin-bottom: 40px;" v-show="showForm">
-              <p>Your Inquiry</p>
+              <p>{{ $t('m.YourInquiry') }}</p>
               <el-input type="textarea"
                         :autosize="{ minRows: 4, maxRows: 8}" clearable
                         resize="none"
                         v-model="inquiry"
                         placeholder="Your website is like shit!!"></el-input>
-              <p>Rate Us</p>
+              <p>{{ $t('m.RateUs') }}</p>
               <el-rate v-model="rating" style="margin-bottom: 20px;"></el-rate>
-              <el-button style="float: right;" type="primary" @click="handleSubmit">Submit</el-button>
+              <el-button style="float: right;" type="primary" @click="handleSubmit">{{ $t('m.Submit') }}</el-button>
             </form>
             <form style="padding: 20px;margin-bottom: 40px;text-align: center;" v-show="!showForm">
               <i class="el-icon-ice-cream-round successIcon"></i>
-              <h2>Thank You!</h2>
-              <h5>We will email you ASAP</h5>
+              <h2>{{ $t('m.ThankYou') }}</h2>
+              <h5>{{ $t('m.ContactASAP') }}</h5>
               <el-button @click="showForm = true" style="margin-top: 20px;">Get Back</el-button>
             </form>
           </div>
@@ -50,7 +50,7 @@
   import BASE_URL from '../config'
 
   export default {
-        name: "container",
+      name: "container",
       components: {
         navbar
       },
@@ -144,8 +144,9 @@
     transition:all 0.1s linear;
     transform:rotate(0deg);
   }
+
   .helpContainer{
-    height: 650px;
+    height: 80%;
     width: 380px;
     position: fixed;
     bottom: 100px;
@@ -167,8 +168,8 @@
     );
     position: fixed;
     width: 382px;
-    height: 300px;
-    bottom: 450px;
+    height: 40%;
+    bottom: 56%;
     z-index: -1;
     right: 20px;
     border-top-left-radius: 20px;

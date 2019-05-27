@@ -20,9 +20,11 @@ const i18n = new VueI18n({
   }
 })
 
-
-
 Vue.use(ElementUI);
+import VueSwal from 'vue-swal'
+
+Vue.use(VueSwal)
+
 
 /* eslint-disable no-new */
 new Vue({
