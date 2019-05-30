@@ -46,7 +46,8 @@
           <p><i class="el-icon-check" style="color: green;"></i> {{desc}}</p>
           <div class="line" v-show="k < contact.length - 1"></div>
         </div>
-        <el-button type="success" style="margin-top: 20px;">{{ $t('m.LeaveMsg') }}</el-button>
+        <el-button type="success" style="margin-top: 20px;" @click="goSurvey">
+          {{ $t('m.LeaveMsg') }}</el-button>
       </div>
 
     </div>
@@ -76,6 +77,9 @@
     methods: {
       goHome(){
         router.push('/')
+      },
+      goSurvey(){
+        window.location.href = 'https://surveys.hotjar.com/s?siteId=1337569&surveyId=134645'
       },
       startChecking(){
         axios.get(BASE_URL + 'isVIP?userToken=' + localStorage.getItem("token")).then(

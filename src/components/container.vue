@@ -1,8 +1,9 @@
 <template class="searchContainer">
   <div>
     <navbar></navbar>
+    <cookieBar></cookieBar>
     <div class="bkgContainer"></div>
-    <div class="helper" @click="handleHelper">
+    <div class="helper" @click="handleHelper" v-show="false">
       <transition name="el-fade-in-linear">
         <i class="el-icon-s-promotion helpButton openButton" v-show="!shower"></i>
       </transition>
@@ -45,6 +46,8 @@
 
 <script>
   import navbar from './navbarTransparent.vue'
+  import cookieBar from './cookieBar.vue'
+
   import coreContainer from './coreContainer.vue'
   import axios from 'axios'
   import BASE_URL from '../config'
@@ -52,7 +55,8 @@
   export default {
       name: "container",
       components: {
-        navbar
+        navbar,
+        cookieBar
       },
     data(){
       return {

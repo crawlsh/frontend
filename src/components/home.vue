@@ -9,7 +9,13 @@
         </t>
       </h1>
       <h3 style="margin-top: -25px">{{ $t('m.Description') }}</h3>
-      <p>{{ $t('m.ModeSelection') }}</p>
+      <el-tooltip class="item" effect="dark" placement="left-end">
+        <div slot="content">
+          您可以输入您希望爬取的网站以搜索模块<br>
+          也可采用前两个模块进行自定义
+        </div>
+        <p>{{ $t('m.ModeSelection') }}</p>
+      </el-tooltip>
       <div class="customSelect">
         <el-select v-model="selectedMode" filterable :placeholder="$t('m.PleaseSelect')" class="selectContainer">
           <el-option
@@ -70,10 +76,29 @@ export default {
         })
       }
     })
+    if (this.$route.query.confirm == 1){
+      this.confirm()
+    }
   },
   methods: {
     goCrawlSetting: function(selectedMode){
       this.$router.push({ name: 'CrawlSetting', query: { selectedMode: selectedMode }});
+    },
+    confirm(){
+      let fd = new FormData();
+      fd.append('authToken', this.$route.query.authToken);
+      fd.append('email', this.$route.query.email);
+      axios.post(BASE_URL + 'userConfirm', fd).then((res) => {
+        if(res["data"]["success"] === 0){
+          this.$swal("Oops", "验证不成功", "error");
+          this.$router.push({ name: 'Home', query: {}});
+        } else {
+          this.$swal("OK", "验证成功", "success");
+          localStorage.setItem("token", res["data"]["info"])
+          localStorage.setItem("hasLogin", 1)
+          window.location.href = "/"
+        }
+      })
     }
   },
   components: {

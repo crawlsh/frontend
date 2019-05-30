@@ -22,6 +22,12 @@
         <proBadge></proBadge>
       </el-alert>
       <br>
+      <el-alert
+                type="success"
+      >
+        点击您所要获取的信息的位置即可，请确保您选中了全部所需要的
+      </el-alert>
+      <br>
       <div class="browserContent">
         <div class="ball ballGreen"></div>
         <div class="ball ballYellow"></div>

@@ -1,7 +1,13 @@
 <template>
   <div>
     <div>
-      <p>{{ $t('m.EnterLinkForComparisonDescription') }}</p>
+      <el-tooltip class="item" effect="dark" placement="left-end">
+        <div slot="content">
+          请包含http://或https://部分，例子：<br>
+          https://xxx.com/view?id=302
+        </div>
+        <p>{{ $t('m.EnterLinkForComparisonDescription') }}</p>
+      </el-tooltip>
       <el-input class="linkInput"
                 :placeholder="$t('m.Link1')"
                 clearable v-model="firstURL">
@@ -19,8 +25,15 @@
         description=''
         class="paramInputForm"
         show-icon>
-        <el-button type="text" class="urlTemplate">{{ URLTemplate }}</el-button>
-
+        <el-tooltip class="item" effect="dark" placement="left-end">
+          <div slot="content">
+            我们将链接不同之处表示了出来<br>
+            其中每一个@{...}表示一处不同<br>
+            您可以采用以下输入框设置它们的范围<br>
+            以生成所要爬去的所有目标链接
+          </div>
+          <el-button type="text" class="urlTemplate">{{ URLTemplate }}</el-button>
+        </el-tooltip>
       </el-alert>
       <div class="paramInputForm" v-for='(k, v) in URLParams.idParam'>
         <p>{{ $t('m.Key') }}{{ v }} <strong>{{ k }}</strong></p>
@@ -37,6 +50,10 @@
           type="success" v-show="showPossibilityExample">
           {{ $t('m.Possibility') }}: {{ possibility }}<br>
           {{ $t('m.Example') }}: <el-link :href="example" target="_blank">{{ example }}</el-link>
+          <br>
+          <h v-show="showTooManyError">
+            普通账户仅可爬取30条，购买 <proBadge></proBadge> 账户
+          </h>
         </el-alert>
       </div>
       <el-button type="primary" class="paramInputForm" @click="goCrawlForSelection">{{ $t('m.Done') }}</el-button>
@@ -45,6 +62,7 @@
 </template>
 
 <script>
+    import proBadge from "./proBadge"
     export default {
       name: "crawlLinks",
       data() {
@@ -59,8 +77,12 @@
           linkParam: {},
           possibility: 0,
           example: "",
-          showPossibilityExample: false
+          showPossibilityExample: false,
+          showTooManyError: false
         }
+      },
+      components: {
+        proBadge
       },
       methods: {
         getURLParams(URL){
@@ -208,16 +230,22 @@
           }
           this.showPossibilityExample = true;
           this.example = link;
+          if (this.possibility > 30 && localStorage.getItem("isVIP") === "false"){
+            this.showTooManyError = true
+            return 0;
+          }
         },
         goCrawlForSelection(){
           if (localStorage.getItem('hasLogin') == 0){
             this.$swal(this.$t("m.NotLoginError"), "", "error");
             return 0;
           }
-          if (this.possibility > 100){
+          if (this.possibility > 1000){
             this.$swal("爬取可能性过多，请缩小爬取范围", "", "error");
             return 0;
           }
+
+
           this.$router.push({
             name: 'CrawlForSelection', query: {
               selectedMode: 0,
