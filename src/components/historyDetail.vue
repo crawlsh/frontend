@@ -18,7 +18,7 @@
         <div class="buttonContainer">
           <el-button>{{ $t('m.Copy' )}}{{ $t('m.WithStyle' )}}</el-button>
           <el-button>{{ $t('m.Copy' )}}{{ $t('m.WOStyle' )}}</el-button>
-          <el-button>{{ $t('m.Copy' )}}{{ $t('m.link' )}}</el-button>
+          <el-button>{{ $t('m.Copy' )}}{{ $t('m.Link' )}}</el-button>
           <div class="line"></div>
           <el-button @click="showAnalysis('sentiment')"
                      style="margin-bottom: 10px;margin-left: 0; margin-right: 10px;">{{ $t('m.Sentiment' )}}</el-button>

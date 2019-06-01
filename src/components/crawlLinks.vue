@@ -3,8 +3,7 @@
     <div>
       <el-tooltip class="item" effect="dark" placement="left-end">
         <div slot="content">
-          请包含http://或https://部分，例子：<br>
-          https://xxx.com/view?id=302
+          {{ $t("m.URLNotice") }}
         </div>
         <p>{{ $t('m.EnterLinkForComparisonDescription') }}</p>
       </el-tooltip>
@@ -16,7 +15,7 @@
                  :placeholder="$t('m.Link2')"
                  clearable v-model="secondURL">
       </el-input>
-      <el-button type="primary" class="linkInput" plain @click="generateURLTemplate">比较</el-button>
+      <el-button type="primary" class="linkInput" plain @click="generateURLTemplate">{{ $t("m.Compare") }}</el-button>
     </div>
     <div class="paramInputContainer" v-show="showURLTemplates">
       <el-alert
@@ -27,10 +26,7 @@
         show-icon>
         <el-tooltip class="item" effect="dark" placement="left-end">
           <div slot="content">
-            我们将链接不同之处表示了出来<br>
-            其中每一个@{...}表示一处不同<br>
-            您可以采用以下输入框设置它们的范围<br>
-            以生成所要爬去的所有目标链接
+            {{ $t("m.LinkParamNotice") }}
           </div>
           <el-button type="text" class="urlTemplate">{{ URLTemplate }}</el-button>
         </el-tooltip>
@@ -52,7 +48,7 @@
           {{ $t('m.Example') }}: <el-link :href="example" target="_blank">{{ example }}</el-link>
           <br>
           <h v-show="showTooManyError">
-            普通账户仅可爬取30条，购买 <proBadge></proBadge> 账户
+            {{ $t('m.ProCrawlLimit') }}
           </h>
         </el-alert>
       </div>

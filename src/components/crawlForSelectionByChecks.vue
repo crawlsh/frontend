@@ -12,10 +12,10 @@
           <el-checkbox :label="check"  v-for="(check, k) in checksInfo">{{ check }}</el-checkbox>
         </el-checkbox-group>
       </div>
-      <el-button style="margin-top: 20px" @click="dialogPeriodJob = true">{{ $t('m.Submit') }}</el-button>
+      <el-button style="margin-top: 20px" @click="dialogPeriodJob = true">{{ $t('m.SetPeriodicTask') }}</el-button>
     </div>
     <el-dialog
-      title="定时任务设置"
+      :title="$t('m.CrawlParamSetting')"
       :visible.sync="dialogPeriodJob"
       width="40%"
     >

@@ -11,8 +11,7 @@
       <h3 style="margin-top: -25px">{{ $t('m.Description') }}</h3>
       <el-tooltip class="item" effect="dark" placement="left-end">
         <div slot="content">
-          您可以输入您希望爬取的网站以搜索模块<br>
-          也可采用前两个模块进行自定义
+          {{ $t('m.SearchAvailableNotice') }}
         </div>
         <p>{{ $t('m.ModeSelection') }}</p>
       </el-tooltip>
@@ -48,10 +47,9 @@ import BASE_URL from '../config'
 import store from '../store'
 
 export default {
-  name: 'HelloWorld',
+  name: 'Home',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
       selectedMode: '',
       options: [],
     }
@@ -61,11 +59,11 @@ export default {
       store.commit("setCrawlMethodsInfo", res["data"]);
       this.options = [{
         value: "0",
-        label: '按照链接爬取',
+        label: this.$t("m.CrawlLinksLabel"),
         description: ''
       },{
         value: "1",
-        label: '全站爬取',
+        label: this.$t("m.CrawlAllLabel"),
         description: ''
       }]
       for (let method in res["data"]){
@@ -90,10 +88,10 @@ export default {
       fd.append('email', this.$route.query.email);
       axios.post(BASE_URL + 'userConfirm', fd).then((res) => {
         if(res["data"]["success"] === 0){
-          this.$swal("Oops", "验证不成功", "error");
+          this.$swal("Oops", this.$t("m.VerifyUnSuccess"), "error");
           this.$router.push({ name: 'Home', query: {}});
         } else {
-          this.$swal("OK", "验证成功", "success");
+          this.$swal("OK", this.$t("m.VerifySuccess"), "success");
           localStorage.setItem("token", res["data"]["info"])
           localStorage.setItem("hasLogin", 1)
           window.location.href = "/"

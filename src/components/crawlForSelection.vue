@@ -9,10 +9,10 @@
           <h class="totalStep">/&nbsp;&nbsp;2</h>
         </h1>
       </div>
-      <el-alert title="注意！"
+      <el-alert :title='$t("m.Alert")'
                 type="info"
       >
-        为了您的账号安全，我们将网站的脚本以及格式内容删除了。如果没有看见所要爬取的内容，您可以点击如下按钮或联系我们。
+        {{ $t("m.DeleteHTMLLabel") }}
         <br><br>
         <el-switch
           v-model="usingSelenium"
@@ -25,7 +25,7 @@
       <el-alert
                 type="success"
       >
-        点击您所要获取的信息的位置即可，请确保您选中了全部所需要的
+        {{ $t("m.ChooseCarefullyNotice") }}
       </el-alert>
       <br>
       <div class="browserContent">
@@ -57,12 +57,14 @@
           prop="id"
           :label="$t('m.Setting')">
           <template slot-scope="scope">
-            <el-button @click="startChangeCrawlParam(scope.row.id)">修改</el-button>
-            <el-button type="primary" @click="delCrawlParam(scope.row.id)">删除</el-button>
+            <el-button @click="startChangeCrawlParam(scope.row.id)">{{ $t("m.Change") }}</el-button>
+            <el-button type="primary" @click="delCrawlParam(scope.row.id)">{{ $t("m.Delete") }}</el-button>
           </template>
         </el-table-column>
       </el-table>
-      <el-button class="setPeriodicTaskButton" type="primary" @click="startSetPeriodic">设置定时任务</el-button>
+      <el-button class="setPeriodicTaskButton" type="primary" @click="startSetPeriodic">
+        {{ $t("m.SetPeriodicTask") }}
+      </el-button>
     </div>
     <el-dialog
       :title="$t('m.CrawlParamSetting')"

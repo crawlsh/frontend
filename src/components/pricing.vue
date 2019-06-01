@@ -66,9 +66,11 @@
     components: {container},
     data(){
       return {
-        free: ["多IP匿名爬取", "被墙网站爬取", "语义分析"],
-        paid: ["更快的速度", "无限制爬取", "设置定时爬取", "语义分类/概括"],
-        contact: ["本地部署", "破解高级反爬虫机制", "实现登陆", "更多..."],
+        free: [this.$t("m.FreeBenefit1"), this.$t("m.FreeBenefit2"), this.$t("m.FreeBenefit3")],
+        paid: [this.$t("m.ProBenefit1"), this.$t("m.ProBenefit2"),
+          this.$t("m.ProBenefit3"), this.$t("m.ProBenefit4")],
+        contact: [this.$t("m.ContactBenefit1"), this.$t("m.ContactBenefit2"),
+          this.$t("m.ContactBenefit3"), this.$t("m.ContactBenefit4")],
         payMethodDialog: false,
         showPay: true,
         backend: BASE_URL
@@ -89,8 +91,8 @@
               if (res["data"]["info"]){
                 this.payMethodDialog = false
                 this.showPay = false
-                this.$alert('你已经是VIP啦，请不要重复购买！', '成功！', {
-                  confirmButtonText: '返回',
+                this.$alert(this.$t("m.AlreadyVIP"), this.$t("m.Success"), {
+                  confirmButtonText: this.$t("m.Back"),
                 });
                 this.stopChecking();
               }
