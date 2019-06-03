@@ -4,7 +4,7 @@
     <div class="searchContainer">
       <h1 class="title">
         <img src="/static/spider.svg" height="30px" width="30px" class="logo" />
-        <t>
+        <t style="font-family: 'Righteous', cursive;">
           {{ $t('m.App') }}
         </t>
       </h1>
