@@ -125,7 +125,7 @@ export const m = {
   SecuredContent:'黑客或追踪者需要跨越代理服务器，两道防火墙，以及无数蜜罐系统才可以访问加密的用户数据',
   UserCount:'使用Crawl.sh的用户已有',
   ReadUserComments:'查看用户留言',
-  ThisIsUs:'这就是Crawl.sh:',
+  ThisIsUs:'这就是Crawl.sh',
   StartToUse:'开始使用',
   DevDocs:'开发文档',
   Intro:'详细介绍',
@@ -149,4 +149,9 @@ export const m = {
 '其中每一个@{...}表示一处不同<br>'+
 '您可以采用以下输入框设置它们的范围<br>'+
 '以生成所要爬去的所有目标链接',
+  ContactUs: '联系我们',
+  Week: '周',
+  LeaveMsg: '留言',
+  DeleteHTMLLabel: '为了您的安全，我们对网站内容进行了格式化，' +
+    '如若没有看见您要爬取的内容并确定是由于反爬虫机制，您可以开启以下破解功能或联系我们。'
 }

@@ -43,7 +43,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: 'https://crawl-cdn.zwang.tech/',
+    assetsPublicPath: 'https://cdn-bucket.crawl.zwang.tech/',
 
     /**
      * Source Maps

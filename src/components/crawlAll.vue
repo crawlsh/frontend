@@ -2,7 +2,7 @@
   <div>
     <p>{{$t('m.RandomlyInputArticleLink')}}</p>
     <el-input
-              :placeholder="$t('m.link')"
+              :placeholder="$t('m.Link')"
               clearable v-model="exampleLink">
     </el-input>
     <el-button type="primary" class="submitButton" @click="nextStep">{{ $t('m.Next') }}</el-button>

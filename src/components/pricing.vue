@@ -33,7 +33,7 @@
             <a :href="backend + '/startPaypal'" target="_blank">
               <img src="https://cdn-bucket.ibkiller.com/img/PayPal.svg" >
             </a>
-            <a :href="backend + '/startAlipay'" target="_blank">
+            <a :href="backend + '/startAlipay?userToken=' + userToken" target="_blank">
               <img src="https://cdn-bucket.ibkiller.com/img/AliPay_logo.svg" height="35px" width="125px">
             </a>
           </span>
@@ -73,7 +73,8 @@
           this.$t("m.ContactBenefit3"), this.$t("m.ContactBenefit4")],
         payMethodDialog: false,
         showPay: true,
-        backend: BASE_URL
+        backend: BASE_URL,
+        userToken: localStorage.getItem("token")
       }
     },
     methods: {
