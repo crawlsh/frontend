@@ -1,20 +1,46 @@
 <template>
   <div>
     <div>
+      <el-alert
+        title="一个例子"
+        type="success">
+        在新闻网站36Kr (https://36kr.com/)中<br>
+        每篇文章的链接都是 https://36kr.com/p/ 加上一串数字<br>
+        如：https://36kr.com/p/7<br>
+        因此我们可以通过设置这一串数字的范围以达到获得文章链接的目的<br>
+        如当您想爬取前三十篇文章，那么链接便是<br>
+        https://36kr.com/p/1<br>
+        https://36kr.com/p/2<br>
+        https://36kr.com/p/3<br>
+        ...<br>
+        https://36kr.com/p/30<br>
+        而在以下两个输入框中您只需要输入<br>
+        https://36kr.com/p/30<br>
+        https://36kr.com/p/31<br>
+        即可，我们的系统可以自动识别规律
+
+      </el-alert>
+      <p>{{ $t('m.EnterLinkForComparisonDescription') }}</p>
+
       <el-tooltip class="item" effect="dark" placement="left-end">
         <div slot="content">
-          {{ $t("m.URLNotice") }}
+          <span v-html="$t('m.URLNotice')"></span>
         </div>
-        <p>{{ $t('m.EnterLinkForComparisonDescription') }}</p>
+        <el-input class="linkInput"
+                  :placeholder="$t('m.Link1')"
+                  clearable v-model="firstURL">
+        </el-input>
       </el-tooltip>
-      <el-input class="linkInput"
-                :placeholder="$t('m.Link1')"
-                clearable v-model="firstURL">
-      </el-input>
-      <el-input  class="linkInput"
-                 :placeholder="$t('m.Link2')"
-                 clearable v-model="secondURL">
-      </el-input>
+      <el-tooltip class="item" effect="dark" placement="left-end">
+        <div slot="content">
+          <span v-html="$t('m.URLNotice')"></span>
+        </div>
+        <el-input  class="linkInput"
+                   :placeholder="$t('m.Link2')"
+                   clearable v-model="secondURL">
+        </el-input>
+      </el-tooltip>
+
       <el-button type="primary" class="linkInput" plain @click="generateURLTemplate">{{ $t("m.Compare") }}</el-button>
     </div>
     <div class="paramInputContainer" v-show="showURLTemplates">
@@ -26,19 +52,21 @@
         show-icon>
         <el-tooltip class="item" effect="dark" placement="left-end">
           <div slot="content">
-            {{ $t("m.LinkParamNotice") }}
+            <span v-html='$t("m.LinkParamNotice")'></span>
           </div>
           <el-button type="text" class="urlTemplate">{{ URLTemplate }}</el-button>
         </el-tooltip>
       </el-alert>
       <div class="paramInputForm" v-for='(k, v) in URLParams.idParam'>
-        <p>{{ $t('m.Key') }}{{ v }} <strong>{{ k }}</strong></p>
+        <p>在以上链接中<strong>{{ k }}</strong>的范围</p>
         <div class="inputParamValueContainer">
           <el-input-number @change="setParam(v)"
-                           v-model="form[v.toString() + 'a']"></el-input-number>
+                           v-model="form[v.toString() + 'a']"
+                            min="0"></el-input-number>
           <h>-</h>
           <el-input-number @change="setParam(v)"
-                           v-model="form[v.toString() + 'b']"></el-input-number>
+                           v-model="form[v.toString() + 'b']"
+                           min="0"></el-input-number>
         </div>
       </div>
       <div style="margin-top: 20px;">
@@ -232,7 +260,7 @@
           }
         },
         goCrawlForSelection(){
-          if (localStorage.getItem('hasLogin') == 0){
+          if (localStorage.getItem('hasLogin') == null || localStorage.getItem('hasLogin') == 0){
             this.$swal(this.$t("m.NotLoginError"), "", "error");
             return 0;
           }
@@ -240,8 +268,10 @@
             this.$swal("爬取可能性过多，请缩小爬取范围", "", "error");
             return 0;
           }
-
-
+          if (this.possibility == "Unavailable"){
+            this.$swal("范围设置有误", "", "error");
+            return 0;
+          }
           this.$router.push({
             name: 'CrawlForSelection', query: {
               selectedMode: 0,

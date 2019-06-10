@@ -207,6 +207,7 @@
         localStorage.setItem('token', '');
         localStorage.setItem('hasLogin', 0);
         this.hasLogin = 0
+        window.location.href = "/"
       },
       getRules(){
         let fd = new FormData();

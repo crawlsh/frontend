@@ -5,6 +5,12 @@
       <h1 class="title">
           {{ $t('m.Job') }}
       </h1>
+      <el-alert
+        title="注意"
+        type="info"
+        >
+        非<proBadge></proBadge> 用户仅能爬取50个链接，剩余暂停爬取
+      </el-alert>
       <el-table
         :data="tableData"
         style="width: 100%"
@@ -53,6 +59,7 @@
   import coreContainer from './coreContainer.vue'
   import axios from 'axios'
   import BASE_URL from '../config'
+  import proBadge from './proBadge.vue'
   export default {
     data () {
       return {
@@ -106,7 +113,8 @@
     },
     components: {
       container,
-      promo
+      promo,
+      proBadge
     },
     mixins: [coreContainer]
   }

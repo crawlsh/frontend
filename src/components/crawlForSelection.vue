@@ -27,7 +27,7 @@
       >
         {{ $t("m.ChooseCarefullyNotice") }}
       </el-alert>
-      <br>
+      <p>请选择您需要爬取的部分</p>
       <div class="browserContent">
         <div class="ball ballGreen"></div>
         <div class="ball ballYellow"></div>
@@ -110,6 +110,14 @@
         <el-button type="primary" @click="submitJob">{{ $t('m.Confirm') }}</el-button>
       </span>
     </el-dialog>
+    <el-dialog
+      title="爬取中"
+      :visible.sync="progressDialog"
+      :show-close="false"
+      width="30%">
+      <el-progress :percentage="progressNow"></el-progress>
+
+    </el-dialog>
 
 
   </div>
@@ -143,7 +151,8 @@
         maxRetry: '',
         crawlID: '',
         usingSelenium: 0,
-
+        progressDialog: true,
+        progressNow: 40
       }
     },
     mounted(){
@@ -158,7 +167,14 @@
       container
     },
     methods: {
+      sleep(ms) {
+        return new Promise(function(resolve, reject) {
+          setTimeout(resolve, ms)
+        })
+      },
       switchToSelenium(){
+        this.usingSelenium ? this.$swal("开发中", "", "error") : ""
+        return
         this.FSFrameLink = `${BASE_URL}crawlForSelectionHTML?url=${this.exampleLink}`+
           `&token=${localStorage.getItem("token")}`+
           `&selenium=${this.usingSelenium ? 1 : 0}`;
@@ -178,8 +194,13 @@
         this.postMessageListener = e => {
           var data = e.data;
           if(data.popNotice){
-            console.log(data.crawlID)
             this.startSetCrawlParam(data.id, data.crawlID)
+          }
+          if(data.loaded){
+            this.progressNow = 100
+            this.sleep(800).then(()=>{
+              this.progressDialog = false
+            })
           }
         };
         window.addEventListener('message', this.postMessageListener)

@@ -11,7 +11,7 @@
       <h3 style="margin-top: -25px">{{ $t('m.Description') }}</h3>
       <el-tooltip class="item" effect="dark" placement="left-end">
         <div slot="content">
-          {{ $t('m.SearchAvailableNotice') }}
+          <span v-html="$t('m.SearchAvailableNotice')"></span>
         </div>
         <p>{{ $t('m.ModeSelection') }}</p>
       </el-tooltip>
@@ -22,9 +22,8 @@
             :key="item.value"
             :label="item.label"
             :value="item.value">
-            <span style="font-family: 'Avenir', Helvetica, Arial, sans-serif;float: left">{{ item.label }}</span>
-            <span style="font-family: 'Avenir', Helvetica, Arial, sans-serif;
-                         float: right; color: #8492a6; font-size: 13px">{{ item.description }}</span>
+            <span style="float: left">{{ item.label }}</span>
+            <span style="float: right; color: #8492a6; font-size: 13px">{{ item.description }}</span>
           </el-option>
         </el-select>
         <div class="startJourneyContainer">

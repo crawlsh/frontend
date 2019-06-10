@@ -9,12 +9,13 @@
           !localStorage.getItem("okCookie") ? this.$notify({
             title: this.$t("m.GDPRAndPrivacy"),
             dangerouslyUseHTMLString: true,
-            message: this.$t("m.GDPRAndPrivacyDetail"), 
+            message: this.$t("m.GDPRAndPrivacyDetail"),
             duration: 0,
             onClose: function () {
-              localStorage.setItem("okCookie", true)
+
             }
           }) : "";
+          localStorage.setItem("okCookie", true)
         }
     }
 </script>

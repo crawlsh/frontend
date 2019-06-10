@@ -7,12 +7,21 @@
     </el-radio-group>
     <div style="margin-top: 20px;">
       <div v-show="radio === 1">
+        <el-alert
+          title="一个例子"
+          type="success">
+          在新闻网站36Kr (https://36kr.com/)中<br>
+          如果您希望获取第30-1000篇文章（依照时间顺序）<br>
+          在以下输入框中输入30-1000即可<br>
+        </el-alert>
+        <br>
         <h>ID：  </h>
-        <el-input-number v-model="startID"></el-input-number>
+        <el-input-number v-model="startID" min="0"></el-input-number>
         <h>-</h>
-        <el-input-number v-model="endID"></el-input-number>
+        <el-input-number v-model="endID" min="0"></el-input-number>
       </div>
       <div v-show="radio === 2">
+
           <span class="demonstration">{{ $t('m.Time')}}：  </span>
           <el-date-picker
             v-model="time"
@@ -23,8 +32,16 @@
           </el-date-picker>
       </div>
       <div v-show="radio === 3">
+        <el-alert
+          title="一个例子"
+          type="success">
+          在新闻网站36Kr (https://36kr.com/)中<br>
+          如果您希望随机获取30篇文章<br>
+          在以下输入框中输入30<br>
+        </el-alert>
+        <br>
         <h>{{$t('m.Amount')}}：  </h>
-        <el-input-number v-model="amount"></el-input-number>
+        <el-input-number v-model="amount" min="1"></el-input-number>
       </div>
     </div>
     <el-button style="margin-top: 20px;" @click="nextStep">{{$t('m.Next')}}</el-button>
@@ -98,6 +115,16 @@
             "amount": this.amount,
           },
           "crawlBy": crawlBy,
+        }
+        if (localStorage.getItem('hasLogin') == null || localStorage.getItem('hasLogin') == 0){
+          this.$swal(this.$t("m.NotLoginError"), "", "error");
+          return 0;
+        }
+        if (crawlBy === "ID"){
+          if (this.endID - this.startID <= 0){
+            this.$swal("参数设置错误","", "error");
+            return
+          }
         }
         this.$router.push({ name: 'CrawlForSelectionByChecks', query: {
           userParam: btoa(JSON.stringify(userParam)),

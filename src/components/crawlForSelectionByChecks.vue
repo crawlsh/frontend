@@ -8,11 +8,12 @@
           <h class="step">2</h>
           <h class="totalStep">/&nbsp;&nbsp;2</h>
         </h1>
+        <p>请选择您在页面中需要爬取的部分</p>
         <el-checkbox-group v-model="checkVal">
           <el-checkbox :label="check"  v-for="(check, k) in checksInfo">{{ check }}</el-checkbox>
         </el-checkbox-group>
       </div>
-      <el-button style="margin-top: 20px" @click="dialogPeriodJob = true">{{ $t('m.SetPeriodicTask') }}</el-button>
+      <el-button style="margin-top: 20px" @click="openDialog()">{{ $t('m.SetPeriodicTask') }}</el-button>
     </div>
     <el-dialog
       :title="$t('m.CrawlParamSetting')"
@@ -71,6 +72,15 @@
       container,
     },
     methods: {
+      openDialog(){
+        console.log(this.checkVal.length)
+        if(this.checkVal.length !== 0){
+          this.dialogPeriodJob = true;
+        } else {
+          this.$swal("您还没有选择", "", "error")
+        }
+
+      },
       submitJob() {
         let userParamObj = JSON.parse(atob(this.$route.query.userParam));
         userParamObj["info"]["requiredContent"] = this.checkVal;
