@@ -7,6 +7,8 @@ import CrawlForSelection from '@/components/crawlForSelection'
 import CrawlForSelectionByChecks from '@/components/crawlForSelectionByChecks'
 import HistoryDetail from '@/components/historyDetail'
 import Pricing from '@/components/pricing'
+import Board from '@/components/forum/board'
+import Add from '@/components/forum/add'
 
 Vue.use(Router)
 
@@ -47,6 +49,16 @@ export default new Router({
       path: '/history',
       name: 'History',
       component: History
+    },
+    {
+      path: '/forum/index',
+      name: 'FIndex',
+      component: Board
+    },
+    {
+      path: '/forum/add',
+      name: 'FAdd',
+      component: Add
     }
 
   ]

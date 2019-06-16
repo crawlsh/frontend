@@ -19,7 +19,7 @@
     <el-dialog
           :title="$t('m.Login')"
           :visible.sync="displayLogin"
-          width="60%"
+          width="580px"
           :before-close="clearAll">
       <el-alert type="error" :title="errorMsg" v-show="isLoginError"></el-alert>
       <p class="inputLabel">{{$t("m.Username")}}/{{$t("m.Email")}}:</p>
@@ -35,7 +35,7 @@
     <el-dialog
       :title="$t('m.Register')"
       :visible.sync="displayRegister"
-      width="60%"
+      width="580px"
       :before-close="clearAll">
       <el-alert :title="errorMsg" v-show="isRegisterError"
                 :type="successRegister ? 'success': 'error'"></el-alert>
@@ -52,7 +52,7 @@
     </el-dialog>
     <el-dialog
       :visible.sync="showAddAnalysis"
-      width="60%" style="padding-top: 0;">
+      width="580px" style="padding-top: 0;">
       <h3>{{ $t('m.CurrentRule') }}</h3>
       <span v-for="tag in availableRules" class="ruleContainer">
       {{tag}}
@@ -291,16 +291,15 @@
   }
   .navButton{
     padding: 5px;
-    color: #34495e;
+    color: #eee;
     margin-right: 20px;
 
   }
   .navButton:hover{
-
-    color: #333;
+    color: #ddd;
     margin-right: 20px;
     border-style: solid;
-    border-color: #2c3e50;
+    border-color: #fff;
     border-width: 0;
     border-bottom-width: 1px;
     transition: all 20ms ease-in-out;

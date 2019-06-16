@@ -18,7 +18,7 @@
     <el-dialog
       :title="$t('m.CrawlParamSetting')"
       :visible.sync="dialogPeriodJob"
-      width="40%"
+      width="400px"
     >
       <span>
           <el-radio v-model="isPeriodic" label="0">{{ $t('m.CrawlOnce') }}</el-radio>

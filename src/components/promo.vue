@@ -1,5 +1,27 @@
 <template>
   <div>
+    <section class="bkgStepContainer">
+      <h1 class="title">
+        设置步骤
+      </h1>
+      <hr class="intro1Line">
+      <el-card class="box-card stepContainer step1">
+        <h1>步骤1</h1>
+        <p>CSS3 渐变(Gradients) CSS3 渐变(gradients)可以让你在两个或多个指定的颜色之间显示平稳的过渡。 以前,你必须使用图像来实现这些效果。但是,通过使用 CSS3 渐变</p>
+      </el-card>
+      <img src="/static/downArrow.svg" height="100px"/>
+      <el-card class="box-card stepContainer step2">
+        <h1>步骤2</h1>
+        <p>CSS3 渐变(Gradients) CSS3 渐变(gradients)可以让你在两个或多个指定的颜色之间显示平稳的过渡。 以前,你必须使用图像来实现这些效果。但是,通过使用 CSS3 渐变</p>
+      </el-card>
+      <img src="/static/downArrow2.svg" height="160px"/>
+      <el-card class="box-card stepContainer step3">
+        <h1>步骤3</h1>
+        <p>CSS3 渐变(Gradients) CSS3 渐变(gradients)可以让你在两个或多个指定的颜色之间显示平稳的过渡。 以前,你必须使用图像来实现这些效果。但是,通过使用 CSS3 渐变</p>
+      </el-card>
+
+
+    </section>
   <section class="bkgIntro1Container">
     <i class="introIcon" data-feather="repeat"></i>
 
@@ -22,8 +44,11 @@
       </div>
       <div class="nodeContainer" style="text-align: left;">
         <div v-show="isFeature1">
-          <mapContainer></mapContainer>
-          <p>{{ $t("m.FastContent") }}</p>
+
+          <div style="border-radius: 20px;text-align: center;overflow: hidden;">
+            <faceContainer></faceContainer>
+          </div>
+          <p>{{$t("m.SecuredContent")}}</p>
         </div>
         <div v-show="isFeature2">
           <h3>{{ $t("Example") }}</h3>
@@ -58,10 +83,8 @@
           <p>{{ $t("m.AnalysisContent") }}</p>
         </div>
         <div v-show="isFeature3">
-          <div style="background: #010e28;padding: 20px;border-radius: 20px;text-align: center;">
-            <img src="/static/safe.png" height="280px"/>
-          </div>
-          <p>{{$t("m.SecuredContent")}}</p>
+          <mapContainer></mapContainer>
+          <p>{{ $t("m.FastContent") }}</p>
         </div>
 
       </div>
@@ -84,7 +107,7 @@
   </section>
   <section class="startUseContainer">
     <div style="text-align: center;">
-      <h1 style="font-size: 40px" class="title">
+      <h1 style="font-size: 40px; " class="title">
         {{$t("m.ThisIsUs")}}👏
       </h1>
       <el-button href="#" style="margin-left: 11px;margin-bottom: 40px;width: 150px;">{{$t("m.StartToUse")}}</el-button>
@@ -94,7 +117,6 @@
 
     <div class="footerContent">
       <div style="display: flex;justify-content:center;">
-
         <div class="linkingContainer">
           <a class="linking" href="https://docs.crawl.sh/#/en/Crawl">{{$t("m.DevDocs")}}</a><br>
           <a class="linking" href="https://docs.crawl.sh/">{{$t("m.Intro")}}</a><br>
@@ -119,7 +141,9 @@
 <script>
   import { VueTyper } from 'vue-typer'
   import mapContainer from "./map.vue"
-    export default {
+  import faceContainer from "./face.vue"
+
+  export default {
       name: "promo",
 
       data(){
@@ -128,9 +152,11 @@
             isFeature2: false,
             isFeature3: false,
             features: [
-              {name: this.$t("m.Fast"), id: 1, pic: '/static/zap.svg', desc: this.$t("m.FastDetail")},
+              {name: this.$t("m.Secured"), id: 1, pic: '/static/shield.svg', desc: this.$t("m.SecuredDetail")},
               {name: this.$t("m.Analysis"), id: 2, pic: '/static/dollar-sign.svg', desc: this.$t("m.AnalysisDetail")},
-              {name: this.$t("m.Secured"), id: 3, pic: '/static/shield.svg', desc: this.$t("m.SecuredDetail")}]
+              {name: this.$t("m.Fast"), id: 3, pic: '/static/zap.svg', desc: this.$t("m.FastDetail")},
+            ],
+
           }
       },
       methods: {
@@ -153,7 +179,7 @@
           }
         }
       },
-      components:{mapContainer, VueTyper}
+      components:{mapContainer, VueTyper, faceContainer}
     }
 </script>
 
@@ -166,7 +192,6 @@
     height: 580px;
     border-style: solid;
     border-width: 0;
-    border-bottom-width: 1px;
     border-color: #eee;
     text-align: center;
   }
@@ -184,12 +209,40 @@
 
   .detailsContainer{
     width: 1000px;
-    margin: 10px auto 0;
+    margin: 0px auto 0;
     padding-top: 43px;
     padding-bottom: 40px;
     background: #FFF;
     display: flex;
     z-index: 1000;
+  }
+  .bkgStepContainer{
+    width: 780px;
+    text-align: center;
+    margin: 80px auto;
+  }
+
+  .stepContainer{
+    text-align: left;
+    color: #fff;
+    width: 55%;
+    margin: 20px auto;
+    border-radius: 20px;
+  }
+  .step1{
+    margin-top:  53px;
+    margin-left: 0;
+    background-image: linear-gradient( 135deg, #FCCF31 10%, #F55555 100%);
+  }
+  .step2{
+    margin-top: 33px;
+    margin-right: 0;
+    background-image: linear-gradient( 135deg, #52E5E7 10%, #130CB7 100%);
+  }
+  .step3{
+    margin-top: 33px;
+    margin-left: 0;
+    background-image: linear-gradient( 135deg, #70F570 10%, #49C628 100%);
   }
   .tocContainer{
     width: 200px;
@@ -231,9 +284,8 @@
   }
   .nodeContainer{
     border-left: 1px dashed #e5e5e5;
-    padding-left: 35px;
-    padding-right: 35px;
-    width: 50%;
+    padding-left: 40px;
+    width: 70%;
     display: inline-block;
   }
 

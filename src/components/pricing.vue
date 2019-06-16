@@ -1,8 +1,8 @@
 <template>
   <div>
     <container></container>
-    <div class="pricingContainer">
-      <div class="priceContainer" style="margin-right: 20px; height: max-content;">
+    <div class="pricingCoreContainer">
+      <div class="pricingContainer" style="margin-right: 20px; height: max-content;">
         <h1>{{ $t('m.FreePriceLabel') }}</h1>
         <div v-for="(desc, k) in free">
           <p><i class="el-icon-check" style="color: green;"></i> {{desc}}</p>
@@ -10,7 +10,7 @@
         </div>
         <el-button type="success" style="margin-top: 20px;" plain @click="goHome">{{ $t('m.StartToUse') }}</el-button>
       </div>
-      <div class="priceContainer">
+      <div class="pricingContainer">
         <div style="display: flex;">
           <h1>199 RMB</h1><h1 class="month">/ {{ $t('m.Week') }}</h1>
         </div>
@@ -27,7 +27,7 @@
         <el-dialog
           :title="$t('m.SelectPayMethod')"
           :visible.sync="payMethodDialog"
-          width="30%"
+          width="400px"
           :before-close="handleClose">
           <span>
             <a :href="backend + '/startPaypal'" target="_blank">
@@ -40,7 +40,7 @@
 
         </el-dialog>
       </div>
-      <div class="priceContainer" style="margin-left: 20px; height: max-content;">
+      <div class="pricingContainer" style="margin-left: 20px; height: max-content;">
         <h1>{{ $t('m.ContactUs') }}</h1>
         <div v-for="(desc, k) in contact">
           <p><i class="el-icon-check" style="color: green;"></i> {{desc}}</p>
@@ -120,12 +120,12 @@
 </script>
 
 <style scoped>
-.pricingContainer{
+.pricingCoreContainer{
   display: flex;
   justify-content:center;
   margin-bottom: 50px;
 }
-.priceContainer{
+.pricingContainer{
   text-align: left;
   width: 18%;
   background-color: #FFF;

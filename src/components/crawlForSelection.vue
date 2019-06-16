@@ -69,7 +69,7 @@
     <el-dialog
       :title="$t('m.CrawlParamSetting')"
       :visible.sync="dialogPopNotice"
-      width="70%"
+      width="780px"
     >
       <span>
         <p>{{$t('m.Content')}}</p>
@@ -90,7 +90,7 @@
     <el-dialog
       :title="$t('m.PeriodicTaskSetting')"
       :visible.sync="dialogPeriodJob"
-      width="40%"
+      width="400px"
     >
       <span>
           <el-radio v-model="isPeriodic" label="0">{{ $t('m.CrawlOnce') }}</el-radio>
@@ -114,7 +114,7 @@
       title="爬取中"
       :visible.sync="progressDialog"
       :show-close="false"
-      width="30%">
+      width="580px">
       <el-progress :percentage="progressNow"></el-progress>
 
     </el-dialog>

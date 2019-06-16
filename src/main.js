@@ -25,6 +25,8 @@ import VueSwal from 'vue-swal'
 
 Vue.use(VueSwal)
 
+import wysiwyg from "vue-wysiwyg";
+Vue.use(wysiwyg, {}); // config is optional. more below
 
 /* eslint-disable no-new */
 new Vue({

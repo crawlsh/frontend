@@ -2,7 +2,7 @@
   <div>
     <navbar></navbar>
     <cookieBar></cookieBar>
-    <div class="bkgContainer"></div>
+    <div class="bkgContainer" :class="bkgColor"></div>
     <div class="helper" @click="handleHelper" v-show="false">
       <transition name="el-fade-in-linear">
         <i class="el-icon-s-promotion helpButton openButton" v-show="!shower"></i>
@@ -64,12 +64,23 @@
         inquiry: "",
         rating: null,
         showForm: true,
+        bkgColor: null
       }
     },
     mounted(){
-
+      this.bkgColor = this.randomPickBkg()
     },
     methods: {
+      randomPickBkg(){
+        let arr = [];
+        for (let i = 1; i <= 2; i++)
+          arr.push(i);
+        arr.sort(function () {
+          return 0.5 - Math.random();
+        });
+        arr.length = 1;
+        return "color" + arr[0]
+      },
       handleHelper(){
         this.showForm = true
         this.shower = !this.shower;
@@ -101,18 +112,26 @@
 
 <style scoped>
   .bkgContainer{
-    top: -220px;
+    top: -320px;
     left: 0;
     right: 0;
     width: 100%;
-    height: 680px;
-    background: linear-gradient(52deg, #FF3706,#FFDC18, #27DBB1, #24AADB,#E94584);
+    height: 780px;
     background-size: 250% 100%;
     animation: gradient 1000s linear infinite;
     animation-direction: alternate;
     position: absolute;
     z-index: -1;
     transform: skewY(8deg);
+    border-bottom-right-radius: 30%;
+  }
+  .color1{
+    background-image: linear-gradient(to top right, #9D71D0 0%, #5B94E5 100%);
+  }
+  .color2{
+    background-image: linear-gradient(-90deg, #97ABFF
+    0%, #123597
+    100%);
   }
   @keyframes gradient {
     0% {background-position: 85%}
