@@ -6,18 +6,18 @@
       </h1>
       <hr class="intro1Line">
       <el-card class="box-card stepContainer step1">
-        <h1>步骤1</h1>
-        <p>CSS3 渐变(Gradients) CSS3 渐变(gradients)可以让你在两个或多个指定的颜色之间显示平稳的过渡。 以前,你必须使用图像来实现这些效果。但是,通过使用 CSS3 渐变</p>
+        <h1>生成你需要爬取的网址</h1>
+        <p>我们拥有多种模版，您可以采用现有的网站模版或者直接将爬取整个网站。</p>
       </el-card>
       <img src="/static/downArrow.svg" height="100px"/>
       <el-card class="box-card stepContainer step2">
-        <h1>步骤2</h1>
-        <p>CSS3 渐变(Gradients) CSS3 渐变(gradients)可以让你在两个或多个指定的颜色之间显示平稳的过渡。 以前,你必须使用图像来实现这些效果。但是,通过使用 CSS3 渐变</p>
+        <h1>选择网页中您需要爬取的内容</h1>
+        <p>如若您采用了现有的网站模版，那么您可以直接在选择栏中选择，如您可以选择仅爬取作者名字，或爬取文章内容。如若您选择了爬取全站，那么您只需要在我们系统中简单点击几下即可，不需要专业知识。</p>
       </el-card>
       <img src="/static/downArrow2.svg" height="160px"/>
       <el-card class="box-card stepContainer step3">
-        <h1>步骤3</h1>
-        <p>CSS3 渐变(Gradients) CSS3 渐变(gradients)可以让你在两个或多个指定的颜色之间显示平稳的过渡。 以前,你必须使用图像来实现这些效果。但是,通过使用 CSS3 渐变</p>
+        <h1>完成</h1>
+        <p>现在，您的任务已被分配至我们的服务器网络，在爬取结束后，您可以对数据进行自然语言分析，图片提取等。</p>
       </el-card>
 
 
