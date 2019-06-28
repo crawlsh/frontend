@@ -74,7 +74,7 @@
         if(!this.loading){
           this.getTableData();
         }
-      }, 2000)
+      }, 20000)
     },
     methods: {
       timestampToTime: (timestamp)  =>{

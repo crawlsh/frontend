@@ -62,8 +62,15 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-button class="setPeriodicTaskButton" type="primary" @click="startSetPeriodic">
-        {{ $t("m.SetPeriodicTask") }}
+      <div>
+        <el-button class="setPeriodicTaskButton" @click="startSetPeriodic" type="text">
+          {{ $t("m.SetPeriodicTask") }}
+        </el-button>
+        <analysis></analysis>
+      </div>
+      <br>
+      <el-button type="primary" @click="submitJob">
+        提交任务
       </el-button>
     </div>
     <el-dialog
@@ -106,10 +113,11 @@
 
       </span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogPeriodJob = false">{{ $t('m.Cancel') }}</el-button>
-        <el-button type="primary" @click="submitJob">{{ $t('m.Confirm') }}</el-button>
+        <el-button @click="dialogPeriodJob = false;isPeriodic='0'">{{ $t('m.Cancel') }}</el-button>
+        <el-button type="primary" @click="dialogPeriodJob = false">{{ $t('m.Confirm') }}</el-button>
       </span>
     </el-dialog>
+
     <el-dialog
       title="爬取中"
       :visible.sync="progressDialog"
@@ -130,6 +138,8 @@
   import BASE_URL from '../config'
   import browserStyles from './browserStyles.vue'
   import proBadge from './proBadge.vue'
+  import analysis from './analysis.vue'
+
 
   export default {
     name: 'HelloWorld',
@@ -164,6 +174,7 @@
     },
     components: {
       proBadge,
+      analysis,
       container
     },
     methods: {

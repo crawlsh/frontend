@@ -9,7 +9,7 @@ import HistoryDetail from '@/components/historyDetail'
 import Pricing from '@/components/pricing'
 import Board from '@/components/forum/board'
 import Add from '@/components/forum/add'
-
+import Detail from '@/components/forum/detail'
 Vue.use(Router)
 
 export default new Router({
@@ -59,6 +59,11 @@ export default new Router({
       path: '/forum/add',
       name: 'FAdd',
       component: Add
+    },
+    {
+      path: '/forum/detail',
+      name: 'FDetail',
+      component: Detail
     }
 
   ]

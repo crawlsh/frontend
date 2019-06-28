@@ -126,11 +126,13 @@
             return
           }
         }
+        console.log(this.crawlMethodsInfo);
         this.$router.push({ name: 'CrawlForSelectionByChecks', query: {
           userParam: btoa(JSON.stringify(userParam)),
           selectedMode: this.$route.query.selectedMode,
           isTesting: this.isTesting,
-          crawlMethodsInfo: btoa(JSON.stringify(this.crawlMethodsInfo)),
+          crawlMethodsInfo: btoa(
+            unescape(encodeURIComponent(JSON.stringify(this.crawlMethodsInfo)))),
           localServer: (this.isTesting ? this.localServer : 0),
          }});
       }

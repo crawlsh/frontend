@@ -13,7 +13,15 @@
           <el-checkbox :label="check"  v-for="(check, k) in checksInfo">{{ check }}</el-checkbox>
         </el-checkbox-group>
       </div>
-      <el-button style="margin-top: 20px" @click="openDialog()">{{ $t('m.SetPeriodicTask') }}</el-button>
+      <br>
+      <div>
+        <el-button class="setPeriodicTaskButton" @click="openDialog" type="text">
+          {{ $t("m.SetPeriodicTask") }}
+        </el-button>
+        <analysis></analysis>
+      </div>
+      <br>
+      <el-button @click="submitJob">提交任务</el-button>
     </div>
     <el-dialog
       :title="$t('m.CrawlParamSetting')"
@@ -34,8 +42,8 @@
 
       </span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogPeriodJob = false">{{ $t('m.Cancel') }}</el-button>
-        <el-button type="primary" @click="submitJob">{{ $t('m.Confirm') }}</el-button>
+        <el-button @click="dialogPeriodJob = false;isPeriodic='0'">{{ $t('m.Cancel') }}</el-button>
+        <el-button type="primary" @click="dialogPeriodJob = false">{{ $t('m.Confirm') }}</el-button>
       </span>
     </el-dialog>
   </div>
@@ -47,6 +55,7 @@
   import axios from 'axios'
   import store from '../store'
   import BASE_URL from '../config'
+  import analysis from './analysis'
 
   export default {
     name: 'HelloWorld',
@@ -64,12 +73,14 @@
     },
     mounted(){
       this.isTesting = this.$route.query.isTesting;
-      this.crawlMethodsInfo = JSON.parse(atob(this.$route.query.crawlMethodsInfo));
+      this.crawlMethodsInfo = JSON.parse(
+        decodeURIComponent(escape(atob(this.$route.query.crawlMethodsInfo))));
       this.checksInfo = this.crawlMethodsInfo["requirement"]["info"]["labels"];
       this.localServer = this.$route.query.localServer;
     },
     components: {
       container,
+      analysis
     },
     methods: {
       openDialog(){

@@ -20,10 +20,10 @@
           <el-option
             v-for="item in options"
             :key="item.value"
-            :label="item.label"
+            :label="item.label + ' (' + item.description + ')'"
             :value="item.value">
-            <span style="float: left">{{ item.label }}</span>
-            <span style="float: right; color: #8492a6; font-size: 13px">{{ item.description }}</span>
+            <span style="float: left">{{ item.description }}</span>
+            <span style="float: right; color: #8492a6; font-size: 13px">{{ item.label }}</span>
           </el-option>
         </el-select>
         <div class="startJourneyContainer">
@@ -58,12 +58,12 @@ export default {
       store.commit("setCrawlMethodsInfo", res["data"]);
       this.options = [{
         value: "0",
-        label: this.$t("m.CrawlLinksLabel"),
-        description: ''
+        label: 'CrawlLinks',
+        description: this.$t("m.CrawlLinksLabel")
       },{
         value: "1",
-        label: this.$t("m.CrawlAllLabel"),
-        description: ''
+        label: 'CrawlAllSite',
+        description: this.$t("m.CrawlAllLabel")
       }]
       for (let method in res["data"]){
         this.options.push({
