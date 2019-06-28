@@ -30,10 +30,10 @@
           width="400px"
           :before-close="handleClose">
           <span>
-            <a :href="backend + '/startPaypal'" target="_blank">
+            <a :href="backend + 'startPaypal'" target="_blank">
               <img src="https://cdn-bucket.ibkiller.com/img/PayPal.svg" >
             </a>
-            <a :href="backend + '/startAlipay?userToken=' + userToken" target="_blank">
+            <a :href="backend + 'startAlipay?userToken=' + userToken" target="_blank">
               <img src="https://cdn-bucket.ibkiller.com/img/AliPay_logo.svg" height="35px" width="125px">
             </a>
           </span>
