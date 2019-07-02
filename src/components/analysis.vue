@@ -14,15 +14,22 @@
     <h3>{{ $t('m.NewRule') }}</h3>
     <p class="inputLabel">{{ $t('m.Name') }}</p>
     <el-input v-model="name" placeholder="商务分类"></el-input>
-    <p class="inputLabel">{{ $t('m.Rule') }}</p>
+    <p class="inputLabel">{{ $t('m.Rule') }}关键词</p>
+    <el-alert>
+      输入您希望满足此规则的内容所包含的关键词，用英语分号 (;) 隔开<br>
+      例子：<br>
+      如您爬取获得内容为"Crawl.sh 正在公测中"，您的规则关键词为"公测;投资"，那么该规则对该内容的分析结果为100%。<br>
+      如您爬取获得内容为"Crawl.sh 正在寻求融资中"，您的规则关键词为"公测;投资"，那么该规则对该内容的分析结果依然为100%，因为投资与融资意思相近。
+    </el-alert>
+    <br>
     <el-input v-model="rules" type="textarea"></el-input>
     <div style="margin-top: 20px;">
       <el-radio v-model="way" label="0">{{ $t('m.Contain') }}</el-radio>
       <el-radio v-model="way" label="1">{{ $t('m.NContain') }}</el-radio>
     </div>
     <span slot="footer" class="dialog-footer">
-        <el-button @click="showAddAnalysis = false">{{ $t('m.Cancel') }}</el-button>
-        <el-button type="primary" @click="addRule">{{ $t('m.Submit') }}</el-button>
+        <el-button @click="showAddAnalysis = false">关闭设置框</el-button>
+        <el-button type="primary" @click="addRule">提交新规则</el-button>
       </span>
   </el-dialog>
   </div>

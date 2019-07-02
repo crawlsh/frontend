@@ -1,8 +1,8 @@
 <template>
   <div>
     <el-radio-group v-model="radio">
-      <el-radio :label="1" v-show="isCrawlByIDAvailable">{{ $t('m.CrawlByID')}}</el-radio>
       <el-radio :label="3" v-show="isCrawlByOrderAvailable">{{ $t('m.CrawlByRandom')}}</el-radio>
+      <el-radio :label="1" v-show="isCrawlByIDAvailable">{{ $t('m.CrawlByID')}}</el-radio>
       <el-radio :label="2" v-show="isCrawlByTimeAvailable">{{ $t('m.CrawlByTime')}}</el-radio>
     </el-radio-group>
     <div style="margin-top: 20px;">
@@ -59,7 +59,7 @@
         value: '',
         crawlMethodsInfo: null,
         currentModule: '',
-        radio: 1,
+        radio: 3,
         isCrawlByIDAvailable: 0,
         isCrawlByOrderAvailable: 0,
         isCrawlByTimeAvailable: 0,

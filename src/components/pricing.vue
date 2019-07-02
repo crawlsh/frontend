@@ -12,7 +12,7 @@
       </div>
       <div class="pricingContainer">
         <div style="display: flex;">
-          <h1>199 RMB</h1><h1 class="month">/ {{ $t('m.Week') }}</h1>
+          <h1>299 RMB</h1><h1 class="month">/ {{ $t('m.Week') }}</h1>
         </div>
         <div v-for="(desc, k) in paid">
           <p><i class="el-icon-check" style="color: green;"></i> {{desc}}</p>

@@ -24,7 +24,7 @@
       <el-button @click="submitJob">提交任务</el-button>
     </div>
     <el-dialog
-      :title="$t('m.CrawlParamSetting')"
+      title="定时任务设置"
       :visible.sync="dialogPeriodJob"
       width="400px"
     >
